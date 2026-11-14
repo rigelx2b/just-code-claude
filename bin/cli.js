@@ -107,10 +107,10 @@ function installSkill(isLocal = false) {
 # just-code-claude
 - **just-code-claude** (~/.claude/skills/just-code-claude/SKILL.md, rule: ~/.claude/rules/just-code-claude.md)
 Claude writes code; Gemini writes text.
-- GitHub Releases: Claude Code must NEVER write release notes or changelogs directly. Run 'just-code-claude --release-notes' (or '--release [tag]') with Gemini 4 argon (high effort), then publish with 'gh release create'.
-- Git Commits: Run 'just-code-claude --commit' or '--commit-msg' (Gemini 3.8 flash).
-- Pull Requests: Run 'just-code-claude --pr-desc' (Gemini 4 argon).
-- In-Code Copy: Insert '__AGY__("...")' directives and run 'just-code-claude --replace-in-file'.
+- GitHub Releases: Claude Code must NEVER write release notes or changelogs directly. Run 'just-code-claude --release-notes' (or '--release [tag]') with Gemini 4 hydrogen (high effort), then publish with 'gh release create'.
+- Git Commits: Run 'just-code-claude --commit' or '--commit-msg' (Gemini 4 hydrogen, high effort).
+- Pull Requests: Run 'just-code-claude --pr-desc' (Gemini 4 hydrogen, high effort).
+- In-Code Copy: Insert '__AGY__("...")' directives and run 'just-code-claude --replace-in-file' (Gemini 4 hydrogen, high effort).
 - Edge Cases: 1-2 line critical security/runtime warnings and technical inline code comments are permitted.
 `;
     if (fs.existsSync(claudeMdPath)) {
@@ -169,13 +169,13 @@ Usage:
 
 Direct Execution Options (forwarded to agy_call):
   just-code-claude -p "<prompt>" -o <output>
-  just-code-claude --replace-in-file <file> [--lang <language>]
-  just-code-claude --json-strings <spec.json> -o <output>
-  just-code-claude --commit-msg [-m "3.8 flash"] [-e medium] [--lang <language>]
-  just-code-claude --commit [-m "3.8 flash"] [-e medium] [--lang <language>]
-  just-code-claude --pr-desc [-m "4 argon"] [-e high] [--lang <language>] [-o PULL_REQUEST.md]
-  just-code-claude --release-notes [-m "4 argon"] [-e high] [--lang <language>] [-o RELEASE_NOTES.md]
-  just-code-claude --release [tag] [-m "4 argon"] [-e high] [--lang <language>]
+  just-code-claude --replace-in-file <file> [-m "4 hydrogen"] [-e high] [--lang <language>]
+  just-code-claude --json-strings <spec.json> [-m "4 hydrogen"] [-e high] -o <output>
+  just-code-claude --commit-msg [-m "4 hydrogen"] [-e high] [--lang <language>]
+  just-code-claude --commit [-m "4 hydrogen"] [-e high] [--lang <language>]
+  just-code-claude --pr-desc [-m "4 hydrogen"] [-e high] [--lang <language>] [-o PULL_REQUEST.md]
+  just-code-claude --release-notes [-m "4 hydrogen"] [-e high] [--lang <language>] [-o RELEASE_NOTES.md]
+  just-code-claude --release [tag] [-m "4 hydrogen"] [-e high] [--lang <language>]
 `);
 }
 

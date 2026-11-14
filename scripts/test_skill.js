@@ -16,12 +16,12 @@ if (!fs.existsSync(tmpDir)) {
   fs.mkdirSync(tmpDir, { recursive: true });
 }
 
-console.log('=== [1] Testing basic prompt generation with 3.8 flash & effort setting ===');
+console.log('=== [1] Testing basic prompt generation with 4 hydrogen & high effort setting ===');
 try {
   const run1 = spawnSync(process.execPath, [
     agyCallJs,
-    '-m', '3.8 flash',
-    '-e', 'medium',
+    '-m', '4 hydrogen',
+    '-e', 'high',
     '-p', "Say 'TEST_SUCCESS' and nothing else",
     '--raw'
   ], { encoding: 'utf-8', timeout: 45000 });
@@ -29,7 +29,7 @@ try {
   if (run1.error) console.error('Run1 error:', run1.error.message);
   console.log('Output:\n', run1.stdout || run1.stderr);
   if (run1.status === 0 && (run1.stdout.includes('TEST_SUCCESS') || run1.stdout.length > 0)) {
-    console.log('>>> [1] PASS: Basic prompt generation with 3.8 flash works!\n');
+    console.log('>>> [1] PASS: Basic prompt generation with 4 hydrogen (high) works!\n');
   } else {
     console.log('>>> [1] FAILED: Return code', run1.status);
   }
@@ -60,8 +60,8 @@ fs.writeFileSync(sampleCodePath, sampleCode, 'utf-8');
 try {
   const run2 = spawnSync(process.execPath, [
     agyCallJs,
-    '-m', '3.8 flash',
-    '-e', 'medium',
+    '-m', '4 hydrogen',
+    '-e', 'high',
     '--replace-in-file', sampleCodePath
   ], { encoding: 'utf-8', timeout: 90000 });
 
@@ -85,8 +85,8 @@ try {
   const run3 = spawnSync(process.execPath, [
     agyCallJs,
     '--commit-msg',
-    '-m', '3.8 flash',
-    '-e', 'medium',
+    '-m', '4 hydrogen',
+    '-e', 'high',
     '-p', 'Context: Test commit generation verification'
   ], { encoding: 'utf-8', timeout: 75000 });
 
@@ -107,8 +107,8 @@ try {
   const run4 = spawnSync(process.execPath, [
     agyCallJs,
     '--release-notes',
-    '-m', '3.8 flash',
-    '-e', 'medium',
+    '-m', '4 hydrogen',
+    '-e', 'high',
     '-p', 'Context: Test v1.2.0 release notes verification',
     '-o', testReleaseNotesPath
   ], { encoding: 'utf-8', timeout: 90000 });

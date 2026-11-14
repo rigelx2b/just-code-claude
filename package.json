@@ -37,10 +37,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xyrz47-spec/just-code-claude.git"
+    "url": "git+https://github.com/rigelx2b/just-code-claude.git"
   },
   "bugs": {
-    "url": "https://github.com/xyrz47-spec/just-code-claude/issues"
+    "url": "https://github.com/rigelx2b/just-code-claude/issues"
   },
-  "homepage": "https://github.com/xyrz47-spec/just-code-claude#readme"
+  "homepage": "https://github.com/rigelx2b/just-code-claude#readme"
 }

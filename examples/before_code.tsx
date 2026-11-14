@@ -4,7 +4,7 @@ import React, { useState } from 'react';
  * Example component demonstrating the just-code-claude workflow.
  * Notice how Claude writes all React state, TypeScript logic, and Tailwind classes,
  * while leaving rich, detailed Context Directives inside __AGY__ placeholders
- * for Gemini (3.8 flash) to generate polished, human copy.
+ * for Gemini (4 hydrogen, high effort) to generate polished, human copy.
  */
 export function UserSettingsCard() {
   const [saved, setSaved] = useState(false);
@@ -12,7 +12,7 @@ export function UserSettingsCard() {
   return (
     <form className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md space-y-4">
       <h2 className="text-xl font-bold text-gray-900">
-        __AGY__("Context: Account settings header | Intent: Welcome user to their personal preferences page | Tone: Warm, professional | Constraints: 3-5 words, Title Case | Model: 3.8 flash", "English")__
+        __AGY__("Context: Account settings header | Intent: Welcome user to their personal preferences page | Tone: Warm, professional | Constraints: 3-5 words, Title Case | Model: 4 hydrogen | Effort: high", "English")__
       </h2>
 
       <div>

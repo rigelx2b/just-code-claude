@@ -8,11 +8,10 @@
  *  2. Direct Google Gemini REST API - Uses GEMINI_API_KEY or GOOGLE_API_KEY
  * 
  * Supported Models:
- *  - 3.8 flash: 'gemini-3.8-flash' (Default: Fast, agile, ideal for UI copy, components, git commits)
- *  - 4 argon:   'gemini-4-argon'   (Deep reasoning, complex architecture & release docs, PR specs, releases)
+ *  - 4 hydrogen: 'gemini-4-hydrogen' (Default: Unified model for UI copy, components, git commits, architecture & release docs, PR specs)
  * 
  * Reasoning Effort:
- *  - Configurable via -e, --effort <low|medium|high|xhigh|max> or GEMINI_EFFORT env
+ *  - Configurable via -e, --effort <low|medium|high|xhigh|max> or GEMINI_EFFORT env (Default: high)
  */
 
 const { spawn, execSync } = require('child_process');
@@ -21,27 +20,22 @@ const path = require('path');
 
 function normalizeModel(model) {
   const envModel = process.env.GEMINI_MODEL;
-  const raw = (model || envModel || 'gemini-3.8-flash').toString().trim();
+  const raw = (model || envModel || 'gemini-4-hydrogen').toString().trim();
   const lower = raw.toLowerCase().replace(/[\s_-]+/g, '');
 
-  // 4 argon: gemini-4-argon
-  if (lower.includes('argon') || lower === '4' || lower === '4argon') {
-    return 'gemini-4-argon';
-  }
-  // 3.8 flash: gemini-3.8-flash
-  if (lower.includes('flash') || lower.includes('38') || lower.includes('3.8')) {
-    return 'gemini-3.8-flash';
+  // 4 hydrogen: gemini-4-hydrogen
+  if (lower.includes('hydrogen') || lower === '4' || lower === '4hydrogen') {
+    return 'gemini-4-hydrogen';
   }
   return raw;
 }
 
 function normalizeEffort(effort) {
   const envEffort = process.env.GEMINI_EFFORT || process.env.AGY_EFFORT;
-  const raw = (effort || envEffort || '').toString().trim().toLowerCase();
-  if (!raw) return null;
+  const raw = (effort || envEffort || 'high').toString().trim().toLowerCase();
   const valid = ['low', 'medium', 'high', 'xhigh', 'max'];
   if (valid.includes(raw)) return raw;
-  return null;
+  return 'high';
 }
 
 function findAgyExecutable() {
@@ -127,11 +121,10 @@ function printHelp() {
 Usage: node agy_call.js [options]
 
 Supported Models:
-  1. 3.8 flash: 'gemini-3.8-flash' (Default) - Ultra-fast, ideal for UI copy, components, git commits
-  2. 4 argon:   'gemini-4-argon'             - Maximum reasoning depth, architecture docs, PR specs, releases
+  - 4 hydrogen: 'gemini-4-hydrogen' (Default) - Unified model for UI copy, components, git commits, architecture docs, PR specs, releases
 
 Reasoning Effort:
-  -e, --effort <low|medium|high|xhigh|max>   - Set reasoning budget (Default: medium)
+  -e, --effort <low|medium|high|xhigh|max>   - Set reasoning budget (Default: high)
 
 Execution Backends:
   1. Antigravity CLI (agy): Automatically detected if installed on host.
@@ -148,8 +141,8 @@ Options:
   -p, --prompt <text>          Direct prompt text or developer context
   -f, --file <path>            Read prompt/context from a file
   -o, --output <path>          Write generated output directly to a file
-  -m, --model <name>           Choose model: '3.8 flash' or '4 argon'
-  -e, --effort <level>         Set reasoning effort: low, medium, high, xhigh, max
+  -m, --model <name>           Choose model: '4 hydrogen' (default: gemini-4-hydrogen)
+  -e, --effort <level>         Set reasoning effort: low, medium, high (default), xhigh, max
   -b, --backend <mode>         Backend engine: 'auto' (default), 'agy', or 'api'
   --api-key <key>              Google Gemini API key (or set GEMINI_API_KEY env var)
   -l, --lang <language>        Target output language (e.g. English, Korean, Japanese, Spanish)
@@ -162,16 +155,16 @@ Options:
 
 Examples:
   # 1. Conventional Commit from staged changes
-  node agy_call.js --commit -m "3.8 flash" -e medium -p "Context: Added MFA login modal" --lang Korean
+  node agy_call.js --commit -m "4 hydrogen" -e high -p "Context: Added MFA login modal" --lang Korean
 
-  # 2. Comprehensive PR description with 4 argon
-  node agy_call.js --pr-desc -m "4 argon" -e high -o PULL_REQUEST.md
+  # 2. Comprehensive PR description with 4 hydrogen
+  node agy_call.js --pr-desc -m "4 hydrogen" -e high -o PULL_REQUEST.md
 
   # 3. Generate GitHub Release Notes
-  node agy_call.js --release-notes -m "4 argon" -e high -p "Context: v1.2.0 major release" -o RELEASE_NOTES.md
+  node agy_call.js --release-notes -m "4 hydrogen" -e high -p "Context: v1.2.0 major release" -o RELEASE_NOTES.md
 
   # 4. Generate notes and publish GitHub Release for tag
-  node agy_call.js --release v1.2.0 -m "4 argon" -e high -p "Context: Official stable release"
+  node agy_call.js --release v1.2.0 -m "4 hydrogen" -e high -p "Context: Official stable release"
 `);
 }
 
@@ -511,8 +504,8 @@ Git Diff:
 ${cappedDiff}
 `;
 
-  const chosenModel = options.model || '3.8 flash';
-  const chosenEffort = options.effort || 'medium';
+  const chosenModel = options.model || '4 hydrogen';
+  const chosenEffort = options.effort || 'high';
   console.log(`[just-code-claude] Generating commit message with ${chosenModel} (effort: ${chosenEffort})...`);
 
   const response = await executeGeneration(prompt, { ...options, model: chosenModel, effort: chosenEffort });
@@ -582,7 +575,7 @@ Git Diff:
 ${cappedDiff}
 `;
 
-  const chosenModel = options.model || '4 argon';
+  const chosenModel = options.model || '4 hydrogen';
   const chosenEffort = options.effort || 'high';
   console.log(`[just-code-claude] Generating PR description with ${chosenModel} (effort: ${chosenEffort})...`);
 
@@ -646,7 +639,7 @@ Format Requirements:
 - Ensure all technical terms, flags, and paths are backtick-formatted.
 `;
 
-  const chosenModel = options.model || '4 argon';
+  const chosenModel = options.model || '4 hydrogen';
   const chosenEffort = options.effort || 'high';
   console.log(`[just-code-claude] Generating GitHub Release Notes using ${chosenModel} (effort: ${chosenEffort})...`);
 

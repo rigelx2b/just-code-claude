@@ -16,11 +16,11 @@
 </p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Target: Claude Code](https://img.shields.io/badge/Agent-Claude%20Code-7C3AED.svg)](https://github.com/xyrz47-spec/just-code-claude)
+[![Target: Claude Code](https://img.shields.io/badge/Agent-Claude%20Code-7C3AED.svg)](https://github.com/rigelx2b/just-code-claude)
 [![Powered by: Google Gemini](https://img.shields.io/badge/Powered%20by-Google%20Gemini-4285F4.svg)](https://aistudio.google.com/)
 
 > **"Claude writes code. Gemini writes text."**  
-> Claude Code를 위한 오픈소스 스킬: 클로드는 소프트웨어 아키텍처와 코드 로직에 집중하고, 기술 문서, README, **GitHub 커밋 메시지, PR 설명, GitHub 릴리스 노트(Changelog)**, 코드 내부의 사용자 안내 텍스트(따옴표 `""` 내부 문자열)는 **Google Gemini**(`3.8 flash` 또는 `4 argon`, 추론 노력치 설정 지원)가 **Google Gemini REST API** 또는 **Antigravity CLI(`agy`)**를 통해 생성하도록 역할을 분담합니다.
+> Claude Code를 위한 오픈소스 스킬: 클로드는 소프트웨어 아키텍처와 코드 로직에 집중하고, 기술 문서, README, **GitHub 커밋 메시지, PR 설명, GitHub 릴리스 노트(Changelog)**, 코드 내부의 사용자 안내 텍스트(따옴표 `""` 내부 문자열)는 **Google Gemini**(`4 hydrogen`, 기본 노력치 `high`, 세부 추론 노력치 설정 지원)가 **Google Gemini REST API** 또는 **Antigravity CLI(`agy`)**를 통해 생성하도록 역할을 분담합니다.
 
 ---
 
@@ -79,7 +79,7 @@
         [ 코드 로직 및 아키텍처 ]              [ 자연어 및 사용자 카피 ]
                    │                                     │
               Claude Code                            Google Gemini
-                   │                             (3.8 flash / 4 argon)
+                   │                             (4 hydrogen | high)
                    ▼                                     ▼
       함수형 컴포넌트, 훅,                  UI 버튼 라벨, 토스트 알림,
       데이터 변이, 상태 머신,                에러 메시지, 기술 문서, README,
@@ -117,9 +117,9 @@
 
 #### ✅ 적용 후 (`just-code-claude` 적용)
 - 대화창에 사족 설명 없이 **순수 엔지니어링 코드 구조만 즉시 생성** (응답 속도 2배 이상 체감 향상).
-- 5차원 Context Directives를 바탕으로 Gemini `3.8 flash`가 전문 실전 카피로 즉시 치환:
+- 5차원 Context Directives를 바탕으로 Gemini `4 hydrogen` (`high` 노력치)이 전문 실전 카피로 즉시 치환:
   ```tsx
-  // ✅ Gemini 3.8 flash가 합성한 세련된 사용자 경험(UX) 카피
+  // ✅ Gemini 4 hydrogen (high)가 합성한 세련된 사용자 경험(UX) 카피
   export function WarningBanner() {
     return (
       <div className="alert-warning">
@@ -141,8 +141,8 @@
 - 릴리즈 노트: 개발자가 수작업으로 쓰거나, Claude가 대화창에서 불완전한 요약 작성
 
 #### ✅ 적용 후
-- 커밋 메시지: Gemini `3.8 flash`가 diff를 분석하여 완벽한 Conventional Commits 규격(Header + Body + Footer)으로 자동 생성 및 커밋
-- 릴리즈 노트: Gemini `4 argon` (`high` 노력치)이 태그 간 변경 사항을 심층 분석하여 신규 기능, 버그 수정, 마이그레이션 가이드를 포괄하는 공식 GitHub Release 문서를 자동 작성하고 `gh release create`로 즉시 발행
+- 커밋 메시지: Gemini `4 hydrogen` (`high` 노력치)이 diff를 분석하여 완벽한 Conventional Commits 규격(Header + Body + Footer)으로 자동 생성 및 커밋
+- 릴리즈 노트: Gemini `4 hydrogen` (`high` 노력치)이 태그 간 변경 사항을 심층 분석하여 신규 기능, 버그 수정, 마이그레이션 가이드를 포괄하는 공식 GitHub Release 문서를 자동 작성하고 `gh release create`로 즉시 발행
 
 ---
 
@@ -153,7 +153,7 @@
 | **세션 컨텍스트 토큰 소모** | ~3,500 tokens (사족 설명 포함) | ~1,600 tokens (순수 코드) | **📉 약 54% 토큰 절감** |
 | **응답 생성 속도 (Latency)** | ~18.2초 (장문 텍스트 타이핑) | ~7.8초 (코드 중심 출력) | **⚡ 약 2.3배 속도 향상** |
 | **다국어 i18n 번역 처리** | 메인 세션 컨텍스트 오염 | 배치 CLI로 아웃오브밴드 처리 | **📉 토큰 70% 이상 절감** |
-| **카피라이팅 완성도** | 기계적 플레이스홀더 (`"Error"`) | Gemini 4 argon / 3.8 flash 전문 카피 | **✨ 프로덕션 품질 즉시 사용** |
+| **카피라이팅 완성도** | 기계적 플레이스홀더 (`"Error"`) | Gemini 4 hydrogen (high) 전문 카피 | **✨ 프로덕션 품질 즉시 사용** |
 | **릴리즈 노트 종합 역량** | 단순 커밋 나열 | 심층 분석 및 마이그레이션 가이드 | **🚀 엔터프라이즈 체인지로그** |
 
 ---
@@ -189,31 +189,30 @@
   ```markdown
   # just-code-claude
   - **just-code-claude**: Claude writes code; Gemini writes text.
-  - Releases: Claude Code must run `just-code-claude --release-notes` (Gemini 4 argon high).
-  - Commits: Claude Code must run `just-code-claude --commit` (Gemini 3.8 flash).
+  - Releases: Claude Code must run `just-code-claude --release-notes` (Gemini 4 hydrogen high).
+  - Commits: Claude Code must run `just-code-claude --commit` (Gemini 4 hydrogen high).
   - UI copy: Insert `__AGY__("...")` directives and run `just-code-claude --replace-in-file`.
   - Edge Cases: 1-2 line critical security/runtime warnings and technical inline code comments are permitted.
   ```
 
 ### 3. 세션 내 즉시 호출 (On-demand)
 - 슬래시 명령어: `/just-code-claude`
-- 자연어 지시: *"클로드는 코드만 작성하고, 모든 UI 텍스트와 릴리즈/커밋은 제미나이 3.8 flash high로 위임해줘"*
+- 자연어 지시: *"클로드는 코드만 작성하고, 모든 UI 텍스트와 릴리즈/커밋은 제미나이 4 hydrogen high로 위임해줘"*
 
 ---
 
 ## 🤖 지원 모델 및 노력치(Reasoning Effort) 설정
 
-본 스킬은 2개의 공식 모델과 세부적인 추론 노력치 조절을 지원합니다:
+본 스킬은 통합 공식 모델 **`4 hydrogen`**과 세부적인 추론 노력치 조절을 지원합니다:
 
 | 모델 | CLI 별칭 | 주 사용처 | 권장 노력치 |
 | :--- | :--- | :--- | :--- |
-| **`3.8 flash`** *(기본값)* | `3.8 flash`, `flash`, `gemini-3.8-flash` | 초고속 UI 카피, 버튼 라벨, 모달 대화상자, 폼 유효성 에러, 토스트 알림, Git 커밋 메시지 | `low` 또는 `medium` |
-| **`4 argon`** | `4 argon`, `argon`, `gemini-4-argon` | 고난도 추론, 시스템 아키텍처 문서, 상세 API 명세서, 기술 RFC, GitHub PR 설명, GitHub 릴리스 노트 | `high` 또는 `max` |
+| **`4 hydrogen`** *(기본값)* | `4 hydrogen`, `hydrogen`, `gemini-4-hydrogen` | 모든 자연어 작업 통합 지원: UI 카피, 버튼 라벨, 모달, Git 커밋 메시지, 시스템 아키텍처 문서, API 명세서, GitHub PR 설명, GitHub 릴리스 노트 | `high` |
 
 ### 추론 노력치 (`-e, --effort`):
 - `low`: 단순 마이크로카피, 버튼 텍스트, 단일 레이블 (지연 시간 최소화).
-- `medium` *(기본값)*: 모달 안내문, 폼 검증 에러, 알림창, Git 커밋 메시지.
-- `high`: 심층 기술 문서, 아키텍처 다이어그램 설명, GitHub PR 설명, GitHub 릴리스 노트, 종합 README.
+- `medium`: 간단한 모달 안내문, 일상적인 폼 알림창.
+- `high` *(기본값)*: 프로덕션 UI 카피, Git 커밋 메시지, 심층 기술 문서, 아키텍처 다이어그램 설명, GitHub PR 설명, GitHub 릴리스 노트, 종합 README.
 - `xhigh` / `max`: 대규모 마이그레이션 명세, 보안 백서, 복합 릴리스 패키지 문서.
 
 ---
@@ -238,29 +237,29 @@
 ### 1. 한 번에 커밋 실행 (`--commit`)
 스테이징된 diff를 분석하고, 개발자의 맥락 지시를 결합하여 Conventional Commits 메시지를 생성한 뒤 곧바로 `git commit`을 실행합니다:
 ```bash
-node scripts/agy_call.js --commit -m "3.8 flash" -e medium -p "Context: 2단계 인증 모달 및 복구 코드 발급 로직 구현" --lang Korean
+node scripts/agy_call.js --commit -m "4 hydrogen" -e high -p "Context: 2단계 인증 모달 및 복구 코드 발급 로직 구현" --lang Korean
 ```
 
 ### 2. 커밋 메시지 사전 검토 (`--commit-msg`)
 커밋을 즉시 실행하지 않고 모범적인 Conventional Commits 메시지(제목 50자 이내, 상세 기술 본문)를 생성하여 출력하거나 파일로 저장합니다:
 ```bash
-node scripts/agy_call.js --commit-msg -m "3.8 flash" -e medium -p "Context: 웹소켓 하트비트 레이스 컨디션 해결" --lang Korean
+node scripts/agy_call.js --commit-msg -m "4 hydrogen" -e high -p "Context: 웹소켓 하트비트 레이스 컨디션 해결" --lang Korean
 ```
 
 ### 3. GitHub PR 상세 설명서 생성 (`--pr-desc`)
-**`4 argon`** 모델의 깊은 추론 능력을 활용하여 전체 diff를 분석하고 체계적인 마크다운 PR 문서를 생성합니다:
+**`4 hydrogen`** 모델의 높은 추론 능력을 활용하여 전체 diff를 분석하고 체계적인 마크다운 PR 문서를 생성합니다:
 ```bash
-node scripts/agy_call.js --pr-desc -m "4 argon" -e high -p "Context: Redux에서 Zustand로의 프론트엔드 상태 관리 마이그레이션" -o PULL_REQUEST.md --lang Korean
+node scripts/agy_call.js --pr-desc -m "4 hydrogen" -e high -p "Context: Redux에서 Zustand로의 프론트엔드 상태 관리 마이그레이션" -o PULL_REQUEST.md --lang Korean
 ```
 
 ### 4. GitHub 릴리스 노트 생성 및 발행 (`--release-notes`, `--release [tag]`)
 이전 태그 이후의 커밋 및 통계를 분석하여 주요 하이라이트, 버그 수정, 브레이킹 체인지가 일목요연하게 정리된 릴리스 노트를 마크다운으로 작성하고 GitHub에 즉시 발행합니다:
 ```bash
 # 릴리스 노트를 파일로 생성
-node scripts/agy_call.js --release-notes -m "4 argon" -e high -p "Context: v1.2.0 마일스톤 릴리스" -o RELEASE_NOTES.md --lang Korean
+node scripts/agy_call.js --release-notes -m "4 hydrogen" -e high -p "Context: v1.2.0 마일스톤 릴리스" -o RELEASE_NOTES.md --lang Korean
 
 # 릴리스 노트 생성 후 GitHub CLI(gh)를 통해 지정 태그로 즉시 발행
-node scripts/agy_call.js --release v1.2.0 -m "4 argon" -e high -p "Context: 공식 안정화 릴리스 v1.2.0" --lang Korean
+node scripts/agy_call.js --release v1.2.0 -m "4 hydrogen" -e high -p "Context: 공식 안정화 릴리스 v1.2.0" --lang Korean
 ```
 
 ---
@@ -286,10 +285,10 @@ node scripts/agy_call.js --release v1.2.0 -m "4 argon" -e high -p "Context: 공�
 
 ```bash
 # Claude Code 전역(Global) 스킬로 설치 (권장)
-npx skills add xyrz47-spec/just-code-claude -g -a claude-code
+npx skills add rigelx2b/just-code-claude -g -a claude-code
 
 # 또는 현재 작업 중인 프로젝트 로컬에만 설치
-npx skills add xyrz47-spec/just-code-claude -a claude-code
+npx skills add rigelx2b/just-code-claude -a claude-code
 ```
 
 ---
@@ -298,14 +297,14 @@ npx skills add xyrz47-spec/just-code-claude -a claude-code
 
 #### Windows (PowerShell):
 ```powershell
-git clone https://github.com/xyrz47-spec/just-code-claude.git
+git clone https://github.com/rigelx2b/just-code-claude.git
 cd just-code-claude
 .\install.ps1
 ```
 
 #### Linux / macOS (Bash):
 ```bash
-git clone https://github.com/xyrz47-spec/just-code-claude.git
+git clone https://github.com/rigelx2b/just-code-claude.git
 cd just-code-claude
 bash install.sh
 ```
@@ -331,14 +330,14 @@ bash install.sh
    ```
 3. 기본 모델 및 노력치를 환경 변수로 사전 지정할 수도 있습니다:
    ```bash
-   export GEMINI_MODEL="gemini-3.8-flash"
-   export GEMINI_EFFORT="medium"
+   export GEMINI_MODEL="gemini-4-hydrogen"
+   export GEMINI_EFFORT="high"
    ```
 
 ### 백엔드 2: Antigravity CLI (`agy`)
 Antigravity 환경에서 작업 중인 사용자를 위한 로컬 백엔드입니다:
 - 시스템 `PATH` 또는 기본 설치 경로에서 `agy`가 감지되면 자동으로 우선 활용됩니다.
-- `--model gemini-3.8-flash` 또는 `--model gemini-4-argon`과 `--effort` 옵션을 매끄럽게 전달합니다.
+- `--model gemini-4-hydrogen`과 `--effort high` 옵션을 매끄럽게 전달합니다.
 
 ---
 
@@ -406,7 +405,7 @@ export function SessionExpiryBanner({ onExtend }) {
 #### 2단계: 자동 치환 도구 실행
 번들 스크립트를 호출하여 플레이스홀더를 치환합니다:
 ```bash
-node scripts/agy_call.js --replace-in-file src/components/SessionExpiryBanner.tsx -m "3.8 flash" -e medium
+node scripts/agy_call.js --replace-in-file src/components/SessionExpiryBanner.tsx -m "4 hydrogen" -e high
 ```
 
 #### 3단계: 프로덕션 코드 완성
@@ -432,14 +431,14 @@ export function SessionExpiryBanner({ onExtend }) {
 
 ### 3. 워크플로우: 기술 문서 및 마크다운 생성
 
-기술 문서, 아키텍처 가이드, README 작성을 제미나이(`4 argon`, `high` 노력치)에 위임합니다:
+기술 문서, 아키텍처 가이드, README 작성을 제미나이(`4 hydrogen`, `high` 노력치)에 위임합니다:
 
 ```bash
-# 4 argon 및 high 노력치를 활용한 심층 아키텍처 문서 생성
-node scripts/agy_call.js -m "4 argon" -e high -p "Context: 이벤트 기반 마이크로서비스 아키텍처 개요. 대상 독자: 시니어 백엔드 엔지니어. 필수 항목: 개요, 시퀀스 다이어그램, 장애 처리 모드. 목표 언어: 한국어." -o docs/ARCHITECTURE.md
+# 4 hydrogen 및 high 노력치를 활용한 심층 아키텍처 문서 생성
+node scripts/agy_call.js -m "4 hydrogen" -e high -p "Context: 이벤트 기반 마이크로서비스 아키텍처 개요. 대상 독자: 시니어 백엔드 엔지니어. 필수 항목: 개요, 시퀀스 다이어그램, 장애 처리 모드. 목표 언어: 한국어." -o docs/ARCHITECTURE.md
 
-# 3.8 flash를 이용한 빠른 개발자 시작 가이드
-node scripts/agy_call.js -m "3.8 flash" -e medium -p "REST API 엔드포인트에 대한 빠른 개발자 시작 가이드를 작성해줘" -l Korean -o docs/API_GUIDE.md
+# 4 hydrogen을 이용한 빠른 개발자 시작 가이드
+node scripts/agy_call.js -m "4 hydrogen" -e high -p "REST API 엔드포인트에 대한 빠른 개발자 시작 가이드를 작성해줘" -l Korean -o docs/API_GUIDE.md
 ```
 
 ---
@@ -460,10 +459,10 @@ node scripts/agy_call.js -m "3.8 flash" -e medium -p "REST API 엔드포인트�
 명령어 한 줄로 다국어 번역 사전을 생성합니다:
 ```bash
 # 스페인어 로케일 파일 생성
-node scripts/agy_call.js --json-strings ui_spec.json -m "3.8 flash" -o src/locales/es.json --lang Spanish
+node scripts/agy_call.js --json-strings ui_spec.json -m "4 hydrogen" -e high -o src/locales/es.json --lang Spanish
 
 # 한국어 로케일 파일 생성
-node scripts/agy_call.js --json-strings ui_spec.json -m "3.8 flash" -o src/locales/ko.json --lang Korean
+node scripts/agy_call.js --json-strings ui_spec.json -m "4 hydrogen" -e high -o src/locales/ko.json --lang Korean
 ```
 
 ---
@@ -473,24 +472,24 @@ node scripts/agy_call.js --json-strings ui_spec.json -m "3.8 flash" -o src/local
 > [!IMPORTANT]
 > **클로드 코드가 릴리즈를 수행할 때의 동작 방식**:  
 > 사용자가 클로드 코드에 *"v1.2.0 릴리즈해줘"*, *"GitHub 릴리즈 작성해줘"*, *"새 버전 배포해줘"*라고 지시하면, 클로드 코드는 자체 LLM으로 릴리즈 노트를 직접 작성하지 않습니다.  
-> 클로드 코드는 `~/.claude/rules/just-code-claude.md` 규칙에 따라 Git 변경 사항(태그, 커밋 로그, diff 통계)을 수집하고, 제미나이 **`4 argon`** (`high` 노력치)에 위임하여 전문적인 릴리즈 노트를 생성한 뒤 GitHub CLI(`gh release create`)로 발행합니다.
+> 클로드 코드는 `~/.claude/rules/just-code-claude.md` 규칙에 따라 Git 변경 사항(태그, 커밋 로그, diff 통계)을 수집하고, 제미나이 **`4 hydrogen`** (`high` 노력치)에 위임하여 전문적인 릴리즈 노트를 생성한 뒤 GitHub CLI(`gh release create`)로 발행합니다.
 
 ```bash
-# 옵션 1: Conventional Commits 메시지 자동 생성 및 즉시 커밋 (3.8 flash)
-just-code-claude --commit -m "3.8 flash" -e medium -p "Context: MFA 로그인 모달 및 토큰 갱신 로직 추가" --lang Korean
+# 옵션 1: Conventional Commits 메시지 자동 생성 및 즉시 커밋 (4 hydrogen)
+just-code-claude --commit -m "4 hydrogen" -e high -p "Context: MFA 로그인 모달 및 토큰 갱신 로직 추가" --lang Korean
 
 # 옵션 2: 커밋 메시지를 파일로 생성하여 검토
-just-code-claude --commit-msg -m "3.8 flash" -e medium -o .commit_msg.tmp
+just-code-claude --commit-msg -m "4 hydrogen" -e high -o .commit_msg.tmp
 git commit -F .commit_msg.tmp
 
-# 옵션 3: 4 argon을 활용한 종합 GitHub PR 설명 작성
-just-code-claude --pr-desc -m "4 argon" -e high -p "Context: 프론트엔드 상태 관리 아키텍처 개선" -o PULL_REQUEST.md --lang Korean
+# 옵션 3: 4 hydrogen을 활용한 종합 GitHub PR 설명 작성
+just-code-claude --pr-desc -m "4 hydrogen" -e high -p "Context: 프론트엔드 상태 관리 아키텍처 개선" -o PULL_REQUEST.md --lang Korean
 
 # 옵션 4: 최신 태그/커밋 기반 GitHub 릴리스 노트 작성
-just-code-claude --release-notes -m "4 argon" -e high -p "Context: v1.2.0 마일스톤 릴리스" -o RELEASE_NOTES.md --lang Korean
+just-code-claude --release-notes -m "4 hydrogen" -e high -p "Context: v1.2.0 마일스톤 릴리스" -o RELEASE_NOTES.md --lang Korean
 
 # 옵션 5: 릴리스 노트를 생성하고 GitHub CLI(gh release create)로 즉시 공식 발행
-just-code-claude --release v1.2.0 -m "4 argon" -e high -p "Context: 공식 안정화 릴리스 v1.2.0" --lang Korean
+just-code-claude --release v1.2.0 -m "4 hydrogen" -e high -p "Context: 공식 안정화 릴리스 v1.2.0" --lang Korean
 ```
 
 ---
@@ -502,11 +501,10 @@ just-code-claude --release v1.2.0 -m "4 argon" -e high -p "Context: 공식 안�
    또는: python scripts/agy_call.py [옵션]
 
 지원 모델:
-  - '3.8 flash' (gemini-3.8-flash) [기본값]   : 초고속 UI 카피, 컴포넌트 안내문, Git 커밋
-  - '4 argon'   (gemini-4-argon)              : 고난도 추론, 아키텍처 설계 문서, PR 명세서, 릴리스 노트
+  - '4 hydrogen' (gemini-4-hydrogen) [기본값]: UI 카피, 컴포넌트 안내문, Git 커밋, 아키텍처 설계 문서, PR 명세서, 릴리스 노트 통합 지원
 
 추론 노력치 (Reasoning Effort):
-  -e, --effort <low|medium|high|xhigh|max>    : 추론 예산 및 노력치 수준 설정 (기본값: medium)
+  -e, --effort <low|medium|high|xhigh|max>    : 추론 예산 및 노력치 수준 설정 (기본값: high)
 
 Git & GitHub 연동:
   --commit-msg                                : git diff를 분석하여 Conventional Commits 메시지 생성
@@ -523,8 +521,8 @@ Git & GitHub 연동:
   -p, --prompt <text>          생성할 프롬프트 또는 개발자 맥락 지시사항
   -f, --file <path>            파일에서 프롬프트/맥락 읽기
   -o, --output <path>          생성된 결과를 지정한 파일에 직접 저장
-  -m, --model <name>           모델 선택: '3.8 flash' 또는 '4 argon'
-  -e, --effort <level>         추론 노력치 설정: low, medium, high, xhigh, max
+  -m, --model <name>           모델 선택: '4 hydrogen' (기본값: gemini-4-hydrogen)
+  -e, --effort <level>         추론 노력치 설정: low, medium, high (기본값), xhigh, max
   -b, --backend <mode>         백엔드 엔진: 'auto' (기본값), 'api', 'agy'
   --api-key <key>              Google Gemini API 키 (또는 GEMINI_API_KEY 환경변수)
   -l, --lang <language>        결과물 목표 언어 (예: Korean, English, Japanese, Spanish)

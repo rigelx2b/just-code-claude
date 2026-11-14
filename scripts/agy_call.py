@@ -8,11 +8,10 @@ Supports two backends:
  2. Direct Google Gemini REST API - Uses GEMINI_API_KEY or GOOGLE_API_KEY
 
 Supported Models:
- - 3.8 flash: 'gemini-3.8-flash' (Default: Fast, agile, ideal for UI copy, components, git commits)
- - 4 argon:   'gemini-4-argon'   (Deep reasoning, complex architecture & release docs, PR specs, releases)
+ - 4 hydrogen: 'gemini-4-hydrogen' (Default: Unified model for UI copy, components, git commits, architecture & release docs, PR specs)
 
 Reasoning Effort:
- - Configurable via -e, --effort <low|medium|high|xhigh|max> or GEMINI_EFFORT env
+ - Configurable via -e, --effort <low|medium|high|xhigh|max> or GEMINI_EFFORT env (Default: high)
 
 Git & GitHub Integration:
  - --commit-msg    : Draft Conventional Commits message from staged diff
@@ -68,27 +67,22 @@ def with_retry(operation, op_name: str = "API Call", max_retries: int = 3, initi
 
 def normalize_model(model: str = None) -> str:
     env_model = os.environ.get("GEMINI_MODEL")
-    raw = (model or env_model or "gemini-3.8-flash").strip()
+    raw = (model or env_model or "gemini-4-hydrogen").strip()
     lower = re.sub(r"[\s_-]+", "", raw.lower())
 
-    # 4 argon: gemini-4-argon
-    if "argon" in lower or lower == "4" or lower == "4argon":
-        return "gemini-4-argon"
-    # 3.8 flash: gemini-3.8-flash
-    if "flash" in lower or "38" in lower or "3.8" in lower:
-        return "gemini-3.8-flash"
+    # 4 hydrogen: gemini-4-hydrogen
+    if "hydrogen" in lower or lower == "4" or lower == "4hydrogen":
+        return "gemini-4-hydrogen"
     return raw
 
 
 def normalize_effort(effort: str = None) -> str:
     env_effort = os.environ.get("GEMINI_EFFORT") or os.environ.get("AGY_EFFORT")
-    raw = (effort or env_effort or "").strip().lower()
-    if not raw:
-        return None
+    raw = (effort or env_effort or "high").strip().lower()
     valid = ["low", "medium", "high", "xhigh", "max"]
     if raw in valid:
         return raw
-    return None
+    return "high"
 
 
 def find_agy_executable() -> str:
@@ -386,8 +380,8 @@ Git Diff:
 {capped_diff}
 """
 
-    model = getattr(args, "model", None) or "3.8 flash"
-    effort = getattr(args, "effort", None) or "medium"
+    model = getattr(args, "model", None) or "4 hydrogen"
+    effort = getattr(args, "effort", None) or "high"
     print(f"[just-code-claude] Generating commit message with {model} (effort: {effort})...", file=sys.stderr)
 
     response = execute_generation(prompt, args)
@@ -454,7 +448,7 @@ Git Diff:
 {capped_diff}
 """
 
-    model = getattr(args, "model", None) or "4 argon"
+    model = getattr(args, "model", None) or "4 hydrogen"
     effort = getattr(args, "effort", None) or "high"
     print(f"[just-code-claude] Generating PR description with {model} (effort: {effort})...", file=sys.stderr)
 
@@ -518,7 +512,7 @@ Format Requirements:
 - Ensure all technical terms, flags, and paths are backtick-formatted.
 """
 
-    model = getattr(args, "model", None) or "4 argon"
+    model = getattr(args, "model", None) or "4 hydrogen"
     effort = getattr(args, "effort", None) or "high"
     print(f"[just-code-claude] Generating GitHub Release Notes using {model} (effort: {effort})...", file=sys.stderr)
 
@@ -698,8 +692,8 @@ def main():
     parser.add_argument("-f", "--file", help="Read prompt/context from a file")
     parser.add_argument("-o", "--output", help="Write output directly to a file")
     parser.add_argument("-b", "--backend", choices=["auto", "agy", "api"], default="auto", help="Backend engine: 'auto' (default), 'agy', or 'api'")
-    parser.add_argument("-m", "--model", help="Choose model: '3.8 flash' (gemini-3.8-flash) or '4 argon' (gemini-4-argon)")
-    parser.add_argument("-e", "--effort", choices=["low", "medium", "high", "xhigh", "max"], help="Reasoning effort level")
+    parser.add_argument("-m", "--model", help="Choose model: '4 hydrogen' (gemini-4-hydrogen)")
+    parser.add_argument("-e", "--effort", choices=["low", "medium", "high", "xhigh", "max"], help="Reasoning effort level (default: high)")
     parser.add_argument("--api-key", default=os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"), help="Google Gemini API key")
     parser.add_argument("-l", "--lang", help="Target output language (e.g. English, Korean, Japanese, Spanish)")
     parser.add_argument("-s", "--system", help="System prompt instructions")

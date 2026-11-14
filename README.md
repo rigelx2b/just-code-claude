@@ -16,11 +16,11 @@
 </p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Target: Claude Code](https://img.shields.io/badge/Agent-Claude%20Code-7C3AED.svg)](https://github.com/xyrz47-spec/just-code-claude)
+[![Target: Claude Code](https://img.shields.io/badge/Agent-Claude%20Code-7C3AED.svg)](https://github.com/rigelx2b/just-code-claude)
 [![Powered by: Google Gemini](https://img.shields.io/badge/Powered%20by-Google%20Gemini-4285F4.svg)](https://aistudio.google.com/)
 
 > **"Claude writes code. Gemini writes text."**  
-> An open-source **Claude Code skill** designed to separate engineering tasks: Claude focuses on software architecture and code logic, while delegating natural language deliverables (documentation, READMEs, Git commit messages, PR descriptions, GitHub Release notes, and in-code string literals inside quotes) to **Google Gemini** (`3.8 flash` or `4 argon` with customizable reasoning effort) via the **Google Gemini REST API** or the **Antigravity CLI (`agy`)**.
+> An open-source **Claude Code skill** designed to separate engineering tasks: Claude focuses on software architecture and code logic, while delegating natural language deliverables (documentation, READMEs, Git commit messages, PR descriptions, GitHub Release notes, and in-code string literals inside quotes) to **Google Gemini** (`4 hydrogen` with customizable reasoning effort, defaulting to `high`) via the **Google Gemini REST API** or the **Antigravity CLI (`agy`)**.
 
 ---
 
@@ -79,7 +79,7 @@ In modern AI-assisted engineering workflows, different language models exhibit d
         [ Code Logic & Architecture ]          [ Human Language & Copy ]
                    │                                     │
               Claude Code                            Google Gemini
-                   │                             (3.8 flash / 4 argon)
+                   │                             (4 hydrogen | high)
                    ▼                                     ▼
       Function components, hooks,            UI button labels, toasts,
       data mutations, state machines,        error alerts, docs, READMEs,
@@ -117,9 +117,9 @@ In modern AI-assisted engineering workflows, different language models exhibit d
 
 #### ✅ After (`just-code-claude` Active)
 - **Zero conversational chatter**: Claude immediately emits pure, optimized code structure (2x faster perceived speed).
-- In-code directives are seamlessly replaced by Gemini `3.8 flash` into production-grade UX copy:
+- In-code directives are seamlessly replaced by Gemini `4 hydrogen` (`high` effort) into production-grade UX copy:
   ```tsx
-  // ✅ Polished, human-centered UX copy synthesized by Gemini 3.8 flash
+  // ✅ Polished, human-centered UX copy synthesized by Gemini 4 hydrogen (high)
   export function WarningBanner() {
     return (
       <div className="alert-warning">
@@ -141,8 +141,8 @@ In modern AI-assisted engineering workflows, different language models exhibit d
 - Release Notes: Developer manually writes changelogs or Claude produces shallow summaries in chat.
 
 #### ✅ After
-- Commit messages: Gemini `3.8 flash` analyzes the staged diff and generates comprehensive Conventional Commits (Header + Body + Footer).
-- Release Notes: Gemini `4 argon` (`high` effort) deeply synthesizes tag diffs, categorizing Features, Fixes, and Migration Guides, then publishes directly via `gh release create`.
+- Commit messages: Gemini `4 hydrogen` (`high` effort) analyzes the staged diff and generates comprehensive Conventional Commits (Header + Body + Footer).
+- Release Notes: Gemini `4 hydrogen` (`high` effort) deeply synthesizes tag diffs, categorizing Features, Fixes, and Migration Guides, then publishes directly via `gh release create`.
 
 ---
 
@@ -153,7 +153,7 @@ In modern AI-assisted engineering workflows, different language models exhibit d
 | **Session Context Token Usage** | ~3,500 tokens (chatty explanations) | ~1,600 tokens (pure code) | **📉 ~54% Token Savings** |
 | **Response Latency** | ~18.2s (typing prose) | ~7.8s (code-only generation) | **⚡ ~2.3x Faster Delivery** |
 | **Multilingual i18n Translations** | Pollutes main context window | Processed out-of-band via batch CLI | **📉 >70% Context Savings** |
-| **Copywriting Quality** | Robotic placeholders (`"Error"`) | Gemini 4 argon / 3.8 flash copy | **✨ Immediate Production Quality** |
+| **Copywriting Quality** | Robotic placeholders (`"Error"`) | Gemini 4 hydrogen (high) copy | **✨ Immediate Production Quality** |
 | **Release Changelog Synthesis** | Shallow commit list | In-depth analysis & migration notes | **🚀 Enterprise-grade Changelogs** |
 
 ---
@@ -191,31 +191,30 @@ To enforce the standard across team members in a specific repository:
   ```markdown
   # just-code-claude
   - **just-code-claude**: Claude writes code; Gemini writes text.
-  - Releases: Claude Code must run `just-code-claude --release-notes` (Gemini 4 argon high).
-  - Commits: Claude Code must run `just-code-claude --commit` (Gemini 3.8 flash).
+  - Releases: Claude Code must run `just-code-claude --release-notes` (Gemini 4 hydrogen high).
+  - Commits: Claude Code must run `just-code-claude --commit` (Gemini 4 hydrogen high).
   - UI copy: Insert `__AGY__("...")` directives and run `just-code-claude --replace-in-file`.
   - Edge Cases: 1-2 line critical security/runtime warnings and technical inline code comments are permitted.
   ```
 
 ### 3. On-demand Session Trigger
 - Slash Command: `/just-code-claude`
-- Natural Language: *"Claude writes code only; delegate all UI strings, commits, and releases to Gemini 3.8 flash high."*
+- Natural Language: *"Claude writes code only; delegate all UI strings, commits, and releases to Gemini 4 hydrogen high."*
 
 ---
 
 ## 🤖 Supported Models & Reasoning Effort
 
-The skill is built around two primary Google Gemini models with configurable reasoning effort:
+The skill is built around the unified Google Gemini model with configurable reasoning effort:
 
 | Model | CLI Alias | Primary Use Case | Recommended Effort |
 | :--- | :--- | :--- | :--- |
-| **`3.8 flash`** *(Default)* | `3.8 flash`, `flash`, `gemini-3.8-flash` | Ultra-fast UI copy, button labels, modal dialogs, form errors, toast banners, Git commit messages | `low` or `medium` |
-| **`4 argon`** | `4 argon`, `argon`, `gemini-4-argon` | High-reasoning architectural docs, comprehensive API guides, technical RFCs, GitHub PRs, Release Notes | `high` or `max` |
+| **`4 hydrogen`** *(Default)* | `4 hydrogen`, `hydrogen`, `gemini-4-hydrogen` | Unified model for UI copy, button labels, modal dialogs, Git commit messages, high-reasoning architectural docs, API guides, PRs, and Release Notes | `high` |
 
 ### Reasoning Effort (`-e, --effort`):
 - `low`: Microcopy, buttons, individual string labels (instantaneous response).
-- `medium` *(Default)*: Modals, form validations, toast notifications, commit messages.
-- `high`: Deep technical documentation, architecture overviews, GitHub PR descriptions, GitHub Release notes.
+- `medium`: Modals, form validations, toast notifications, routine copy.
+- `high` *(Default)*: Production UI copy, commit messages, deep technical documentation, architecture overviews, GitHub PR descriptions, GitHub Release notes.
 - `xhigh` / `max`: Comprehensive migration specs, security whitepapers, complex multi-page release dossiers.
 
 ---
@@ -240,29 +239,29 @@ To ensure the highest quality copy, Claude is instructed to provide **rich, mult
 ### 1. One-Command Conventional Commit (`--commit`)
 Analyzes your staged changes, incorporates developer context directives, calls Gemini, and executes `git commit`:
 ```bash
-node scripts/agy_call.js --commit -m "3.8 flash" -e medium -p "Context: Added two-factor authentication dialog and recovery code backup flow" --lang English
+node scripts/agy_call.js --commit -m "4 hydrogen" -e high -p "Context: Added two-factor authentication dialog and recovery code backup flow" --lang English
 ```
 
 ### 2. Inspect Commit Message First (`--commit-msg`)
 Generates an exemplary Conventional Commits message (type, scope, subject <= 50 chars, detailed technical body) without committing immediately:
 ```bash
-node scripts/agy_call.js --commit-msg -m "3.8 flash" -e medium -p "Context: Bug fix for race condition in WebSocket heartbeat" --lang Korean
+node scripts/agy_call.js --commit-msg -m "4 hydrogen" -e high -p "Context: Bug fix for race condition in WebSocket heartbeat" --lang Korean
 ```
 
 ### 3. Comprehensive GitHub PR Descriptions (`--pr-desc`)
-Uses **`4 argon`** with high reasoning effort to analyze the entire diff and draft a structured GitHub PR in Markdown:
+Uses **`4 hydrogen`** with high reasoning effort to analyze the entire diff and draft a structured GitHub PR in Markdown:
 ```bash
-node scripts/agy_call.js --pr-desc -m "4 argon" -e high -p "Context: State management migration from Redux to Zustand" -o PULL_REQUEST.md
+node scripts/agy_call.js --pr-desc -m "4 hydrogen" -e high -p "Context: State management migration from Redux to Zustand" -o PULL_REQUEST.md
 ```
 
 ### 4. GitHub Release Notes & Publishing (`--release-notes`, `--release [tag]`)
 Analyzes git tags and commits since the previous release, formats an executive-level changelog with highlights, bug fixes, breaking changes, and publishes via GitHub CLI:
 ```bash
 # Generate release notes to file
-node scripts/agy_call.js --release-notes -m "4 argon" -e high -p "Context: v1.2.0 milestone release" -o RELEASE_NOTES.md
+node scripts/agy_call.js --release-notes -m "4 hydrogen" -e high -p "Context: v1.2.0 milestone release" -o RELEASE_NOTES.md
 
 # Generate and publish GitHub Release for tag
-node scripts/agy_call.js --release v1.2.0 -m "4 argon" -e high -p "Context: Production release v1.2.0"
+node scripts/agy_call.js --release v1.2.0 -m "4 hydrogen" -e high -p "Context: Production release v1.2.0"
 ```
 
 ---
@@ -288,10 +287,10 @@ Using the open standard [skills](https://skills.sh/) CLI is the fastest way to i
 
 ```bash
 # Install globally for Claude Code (Verified)
-npx skills add xyrz47-spec/just-code-claude -g -a claude-code
+npx skills add rigelx2b/just-code-claude -g -a claude-code
 
 # Or install locally for the current repository only
-npx skills add xyrz47-spec/just-code-claude -a claude-code
+npx skills add rigelx2b/just-code-claude -a claude-code
 ```
 
 ---
@@ -300,14 +299,14 @@ npx skills add xyrz47-spec/just-code-claude -a claude-code
 
 #### On Windows (PowerShell):
 ```powershell
-git clone https://github.com/xyrz47-spec/just-code-claude.git
+git clone https://github.com/rigelx2b/just-code-claude.git
 cd just-code-claude
 .\install.ps1
 ```
 
 #### On Linux / macOS (Bash):
 ```bash
-git clone https://github.com/xyrz47-spec/just-code-claude.git
+git clone https://github.com/rigelx2b/just-code-claude.git
 cd just-code-claude
 bash install.sh
 ```
@@ -333,15 +332,15 @@ Recommended for most developers and CI/CD pipelines:
    ```
 3. Set optional model and effort defaults:
    ```bash
-   export GEMINI_MODEL="gemini-3.8-flash"
-   export GEMINI_EFFORT="medium"
+   export GEMINI_MODEL="gemini-4-hydrogen"
+   export GEMINI_EFFORT="high"
    ```
 
 ### Backend 2: Antigravity CLI (`agy`)
 For users working in an Antigravity environment:
 - If `agy` is found on your `PATH` or standard installation path, it is automatically used.
 - Uses your local Antigravity CLI authentication.
-- Seamlessly passes `--model gemini-3.8-flash` or `--model gemini-4-argon` along with `--effort`.
+- Seamlessly passes `--model gemini-4-hydrogen` along with `--effort high`.
 
 ---
 
@@ -409,7 +408,7 @@ export function SessionExpiryBanner({ onExtend }) {
 #### Step B: Automated Replacement
 Claude runs the bundled CLI tool:
 ```bash
-node scripts/agy_call.js --replace-in-file src/components/SessionExpiryBanner.tsx -m "3.8 flash" -e medium
+node scripts/agy_call.js --replace-in-file src/components/SessionExpiryBanner.tsx -m "4 hydrogen" -e high
 ```
 
 #### Step C: Final Production Code
@@ -435,14 +434,14 @@ export function SessionExpiryBanner({ onExtend }) {
 
 ### 3. Workflow: Generating Documentation & Markdown
 
-Delegate technical documentation, architecture guides, or READMEs to Gemini (`4 argon` with `high` effort):
+Delegate technical documentation, architecture guides, or READMEs to Gemini (`4 hydrogen` with `high` effort):
 
 ```bash
-# Architecture specification with 4 argon & high effort
-node scripts/agy_call.js -m "4 argon" -e high -p "Context: Event-driven microservices architecture overview. Audience: Senior Backend Engineers. Required Sections: Overview, Sequence Diagram, Failure Modes. Target Language: English." -o docs/ARCHITECTURE.md
+# Architecture specification with 4 hydrogen & high effort
+node scripts/agy_call.js -m "4 hydrogen" -e high -p "Context: Event-driven microservices architecture overview. Audience: Senior Backend Engineers. Required Sections: Overview, Sequence Diagram, Failure Modes. Target Language: English." -o docs/ARCHITECTURE.md
 
-# Developer guide with 3.8 flash
-node scripts/agy_call.js -m "3.8 flash" -e medium -p "Write an API Getting Started guide in English for our REST endpoints" -o docs/API_GUIDE.md
+# Developer guide with 4 hydrogen
+node scripts/agy_call.js -m "4 hydrogen" -e high -p "Write an API Getting Started guide in English for our REST endpoints" -o docs/API_GUIDE.md
 ```
 
 ---
@@ -463,10 +462,10 @@ Given an input specification `ui_spec.json`:
 Generate production-ready locale files:
 ```bash
 # Generate Spanish translations
-node scripts/agy_call.js --json-strings ui_spec.json -m "3.8 flash" -o src/locales/es.json --lang Spanish
+node scripts/agy_call.js --json-strings ui_spec.json -m "4 hydrogen" -e high -o src/locales/es.json --lang Spanish
 
 # Generate Korean translations
-node scripts/agy_call.js --json-strings ui_spec.json -m "3.8 flash" -o src/locales/ko.json --lang Korean
+node scripts/agy_call.js --json-strings ui_spec.json -m "4 hydrogen" -e high -o src/locales/ko.json --lang Korean
 ```
 
 ---
@@ -476,24 +475,24 @@ node scripts/agy_call.js --json-strings ui_spec.json -m "3.8 flash" -o src/local
 > [!IMPORTANT]
 > **How Claude Code executes releases**:  
 > When you instruct Claude Code to *"release v1.2.0"*, *"create a GitHub release"*, or *"publish release notes"*, Claude Code does NOT write the release notes itself using its own model.  
-> Governed by `~/.claude/rules/just-code-claude.md`, Claude Code extracts git metadata (tags, commit history, diff statistics), formulates Context Directives, and delegates release note synthesis to Gemini **`4 argon`** (`high` effort), then publishes the release via GitHub CLI (`gh release create`).
+> Governed by `~/.claude/rules/just-code-claude.md`, Claude Code extracts git metadata (tags, commit history, diff statistics), formulates Context Directives, and delegates release note synthesis to Gemini **`4 hydrogen`** (`high` effort), then publishes the release via GitHub CLI (`gh release create`).
 
 ```bash
-# Option 1: Commit directly with Conventional Commits (3.8 flash)
-just-code-claude --commit -m "3.8 flash" -e medium -p "Context: Added MFA login modal and token refresh logic" --lang English
+# Option 1: Commit directly with Conventional Commits (4 hydrogen)
+just-code-claude --commit -m "4 hydrogen" -e high -p "Context: Added MFA login modal and token refresh logic" --lang English
 
 # Option 2: Generate commit message to file
-just-code-claude --commit-msg -m "3.8 flash" -e medium -o .commit_msg.tmp
+just-code-claude --commit-msg -m "4 hydrogen" -e high -o .commit_msg.tmp
 git commit -F .commit_msg.tmp
 
-# Option 3: Generate GitHub PR Description with 4 argon
-just-code-claude --pr-desc -m "4 argon" -e high -p "Context: Frontend state architecture upgrade" -o PULL_REQUEST.md
+# Option 3: Generate GitHub PR Description with 4 hydrogen
+just-code-claude --pr-desc -m "4 hydrogen" -e high -p "Context: Frontend state architecture upgrade" -o PULL_REQUEST.md
 
 # Option 4: Generate GitHub Release Notes from git history
-just-code-claude --release-notes -m "4 argon" -e high -p "Context: v1.2.0 milestone release" -o RELEASE_NOTES.md
+just-code-claude --release-notes -m "4 hydrogen" -e high -p "Context: v1.2.0 milestone release" -o RELEASE_NOTES.md
 
 # Option 5: Publish GitHub Release via GitHub CLI
-just-code-claude --release v1.2.0 -m "4 argon" -e high -p "Context: Official stable v1.2.0 release"
+just-code-claude --release v1.2.0 -m "4 hydrogen" -e high -p "Context: Official stable v1.2.0 release"
 ```
 
 ---
@@ -505,11 +504,10 @@ Usage: node scripts/agy_call.js [options]
    or: python scripts/agy_call.py [options]
 
 Supported Models:
-  - '3.8 flash' (gemini-3.8-flash) [Default]  : Ultra-fast, ideal for UI copy, components, commits
-  - '4 argon'   (gemini-4-argon)              : Maximum reasoning depth, architecture docs, PR specs, releases
+  - '4 hydrogen' (gemini-4-hydrogen) [Default]: Unified model for UI copy, components, commits, architecture docs, PR specs, releases
 
 Reasoning Effort:
-  -e, --effort <low|medium|high|xhigh|max>    : Configure reasoning budget / effort (Default: medium)
+  -e, --effort <low|medium|high|xhigh|max>    : Configure reasoning budget / effort (Default: high)
 
 Git & GitHub Integration:
   --commit-msg                                : Analyze git diff and generate Conventional Commit message
@@ -526,8 +524,8 @@ Options:
   -p, --prompt <text>          Direct prompt text or developer context directives
   -f, --file <path>            Read prompt/context from a file
   -o, --output <path>          Write generated output directly to a file
-  -m, --model <name>           Choose model: '3.8 flash' or '4 argon'
-  -e, --effort <level>         Set reasoning effort: low, medium, high, xhigh, max
+  -m, --model <name>           Choose model: '4 hydrogen' (default: gemini-4-hydrogen)
+  -e, --effort <level>         Set reasoning effort: low, medium, high (default), xhigh, max
   -b, --backend <mode>         Backend engine: 'auto' (default), 'api', or 'agy'
   --api-key <key>              Google Gemini API key (or set GEMINI_API_KEY env var)
   -l, --lang <language>        Target output language (e.g. English, Korean, Japanese, Spanish)
