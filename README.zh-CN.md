@@ -20,7 +20,7 @@
 [![Powered by: Google Gemini](https://img.shields.io/badge/Powered%20by-Google%20Gemini-4285F4.svg)](https://aistudio.google.com/)
 
 > **"Claude writes code. Gemini writes text."**  
-> 面向 Claude Code 的开源技能：Claude 专注于软件架构与代码逻辑，而将技术文档、README、**Git 提交信息、PR 说明、GitHub Release 发行注记**以及代码内部双引号 `""` 中的界面文本委托给 **Google Gemini**（默认采用 **`4 hydrogen`** 及 **`high`** 推理努力值，支持自定义调节），通过 **Google Gemini REST API** 或 **Antigravity CLI (`agy`)** 自动生成。
+> 面向 Claude Code 的开源技能：Claude 专注于软件架构与代码逻辑，而将技术文档、README、**Git 提交信息、PR 说明、GitHub Release 发行注记**以及代码内部双引号 `""` 中的界面文本委托给 **Google Gemini**（默认采用 **`4 neon`** 及 **`high`** 推理努力值，支持自定义调节），通过 **Google Gemini REST API** 或 **Antigravity CLI (`agy`)** 自动生成。
 
 ---
 
@@ -28,11 +28,11 @@
 
 ### 场景 1: 前端 UI 组件开发
 - **❌ 采用前 (常规 Claude Code)**: 对话窗口输出大量繁琐寒暄与事后解说，延迟极高。代码内部充斥死板机械的占位符（如 "Session Expiring"、"Please click OK"）。
-- **✅ 采用后 (`just-code-claude`)**: 零冗余对话，**纯代码结构极速瞬发**。Gemini `4 hydrogen` (`high`) 依据 5 维上下文指令自动注入高质量商业文案（"Session Expiring in 5 Minutes"）。上下文 Token 节省超 50%。
+- **✅ 采用后 (`just-code-claude`)**: 零冗余对话，**纯代码结构极速瞬发**。Gemini `4 neon` (`high`) 依据 5 维上下文指令自动注入高质量商业文案（"Session Expiring in 5 Minutes"）。上下文 Token 节省超 50%。
 
 ### 场景 2: Git 提交与 GitHub Release 编写
 - **❌ 采用前**: "update files" 等模糊提交，或在聊天中生成简陋破碎的更新总结。
-- **✅ 采用后**: Gemini `4 hydrogen` (`high` 努力值) 生成完美 Conventional Commits 规范，并深度归纳 diff，自动生成包含新特性、修复与迁移指南的正式 GitHub Release 并调用 `gh release create` 直接发布。
+- **✅ 采用后**: Gemini `4 neon` (`high` 努力值) 生成完美 Conventional Commits 规范，并深度归纳 diff，自动生成包含新特性、修复与迁移指南的正式 GitHub Release 并调用 `gh release create` 直接发布。
 
 ---
 
@@ -43,7 +43,7 @@
 | **会话上下文 Token 消耗** | ~3,500 tokens (含冗余解释) | ~1,600 tokens (纯代码) | **📉 节省约 54%** |
 | **响应生成速度 (Latency)** | ~18.2s (等待文本打字) | ~7.8s (代码优先输出) | **⚡ 提速约 2.3 倍** |
 | **多语言 i18n 本地化** | 严重污染主会话上下文 | 批量 CLI 离线带外处理 | **📉 节省 70% 以上** |
-| **文案专业度与质感** | 机械占位符 (`"Error"`) | Gemini 4 hydrogen (high) | **✨ 生产级别即时可用** |
+| **文案专业度与质感** | 机械占位符 (`"Error"`) | Gemini 4 neon (high) | **✨ 生产级别即时可用** |
 | **Release 综合归纳能力** | 简单提交罗列 | 深度架构提炼与迁移说明 | **🚀 企业级发布注记** |
 
 ---
@@ -66,7 +66,7 @@
 
 1. **全局自动加载 (推荐)**: 运行 `npx skills add rigelx2b/just-code-claude -g -a claude-code` 或 `.\install.ps1`（Linux: `bash install.sh`），自动注入 `~/.claude/rules/just-code-claude.md` 与 `~/.claude/CLAUDE.md`，任意项目免配置即开即用。
 2. **项目级独立规范**: 将 `rules/just-code-claude.md` 拷贝到仓库根目录 `.claude/rules/`，或在项目 `CLAUDE.md` 中声明指令。
-3. **会话即时激活**: 输入 `/just-code-claude` 或在提示词中声明：“使用 4 hydrogen high 模式处理文案与发布”。
+3. **会话即时激活**: 输入 `/just-code-claude` 或在提示词中声明：“使用 4 neon high 模式处理文案与发布”。
 
 ---
 
@@ -74,7 +74,7 @@
 
 | 模型 | CLI 别名 | 主要应用场景 | 推荐努力值 |
 | :--- | :--- | :--- | :--- |
-| **`4 hydrogen`** *(默认)* | `4 hydrogen`, `hydrogen`, `gemini-4-hydrogen` | 全场景统一模型：UI 文案、按钮标签、弹窗、Git 提交信息、系统架构规范、API 指南、GitHub PR 说明、Release 发布注记 | `high` |
+| **`4 neon`** *(默认)* | `4 neon`, `neon`, `gemini-4-neon` | 全场景统一模型：UI 文案、按钮标签、弹窗、Git 提交信息、系统架构规范、API 指南、GitHub PR 说明、Release 发布注记 | `high` |
 
 ---
 
@@ -83,31 +83,31 @@
 > [!IMPORTANT]
 > **Claude Code 执行 Release 时的行为规范**:  
 > 当用户指示 Claude Code “发布 v1.2.0”、“编写 GitHub 规范 Release”时，Claude Code 不会使用自身 LLM 直接编写发布文案。  
-> 依据 `~/.claude/rules/just-code-claude.md` 规则，Claude Code 负责提取 Git Tag、日志及 diff 统计信息，并全权交由 Gemini **`4 hydrogen`**（`high` 思考努力值）进行深度综合编写，随后通过 GitHub CLI（`gh release create`）完成正式发布。
+> 依据 `~/.claude/rules/just-code-claude.md` 规则，Claude Code 负责提取 Git Tag、日志及 diff 统计信息，并全权交由 Gemini **`4 neon`**（`high` 思考努力值）进行深度综合编写，随后通过 GitHub CLI（`gh release create`）完成正式发布。
 
 ### 1. 一键执行规范提交 (`--commit`)
 ```bash
-just-code-claude --commit -m "4 hydrogen" -e high -p "Context: 实现二次验证登录弹窗及令牌自动刷新逻辑" -l Chinese
+just-code-claude --commit -m "4 neon" -e high -p "Context: 实现二次验证登录弹窗及令牌自动刷新逻辑" -l Chinese
 ```
 
 ### 2. 预览提交信息 (`--commit-msg`)
 ```bash
-just-code-claude --commit-msg -m "4 hydrogen" -e high -p "Context: 修复 WebSocket 心跳包竞态条件" -l Chinese
+just-code-claude --commit-msg -m "4 neon" -e high -p "Context: 修复 WebSocket 心跳包竞态条件" -l Chinese
 ```
 
 ### 3. 生成 GitHub PR 详细说明 (`--pr-desc`)
 ```bash
-just-code-claude --pr-desc -m "4 hydrogen" -e high -p "Context: 前端状态管理从 Redux 迁移至 Zustand" -o PULL_REQUEST.md -l Chinese
+just-code-claude --pr-desc -m "4 neon" -e high -p "Context: 前端状态管理从 Redux 迁移至 Zustand" -o PULL_REQUEST.md -l Chinese
 ```
 
 ### 4. GitHub Release 编写与一键发布 (`--release-notes`, `--release [tag]`)
 分析历史 tag 与差异日志，自动梳理亮点功能、修复与破坏性变更，并通过 GitHub CLI 直接发布：
 ```bash
 # 生成 Release 发布注记文件
-just-code-claude --release-notes -m "4 hydrogen" -e high -p "Context: v1.2.0 里程碑版本" -o RELEASE_NOTES.md -l Chinese
+just-code-claude --release-notes -m "4 neon" -e high -p "Context: v1.2.0 里程碑版本" -o RELEASE_NOTES.md -l Chinese
 
 # 直接调用 GitHub CLI 发布指定 Tag
-just-code-claude --release v1.2.0 -m "4 hydrogen" -e high -p "Context: 正式稳定版 v1.2.0" -l Chinese
+just-code-claude --release v1.2.0 -m "4 neon" -e high -p "Context: 正式稳定版 v1.2.0" -l Chinese
 ```
 
 ---
@@ -135,17 +135,17 @@ just-code-claude --release v1.2.0 -m "4 hydrogen" -e high -p "Context: 正式稳
 ## 🛠 CLI 命令行参考
 
 ```bash
-# 使用 4 hydrogen (high) 进行代码内部占位符一键替换
-node scripts/agy_call.js --replace-in-file src/components/Login.tsx -m "4 hydrogen" -e high -l Chinese
+# 使用 4 neon (high) 进行代码内部占位符一键替换
+node scripts/agy_call.js --replace-in-file src/components/Login.tsx -m "4 neon" -e high -l Chinese
 
-# 使用 4 hydrogen (high) 生成深度架构设计文档
-node scripts/agy_call.js -m "4 hydrogen" -e high -p "编写微服务架构概览文档" -o docs/ARCH.md -l Chinese
+# 使用 4 neon (high) 生成深度架构设计文档
+node scripts/agy_call.js -m "4 neon" -e high -p "编写微服务架构概览文档" -o docs/ARCH.md -l Chinese
 
 # 一键自动生成提交信息并完成提交
-node scripts/agy_call.js --commit -m "4 hydrogen" -e high -l Chinese
+node scripts/agy_call.js --commit -m "4 neon" -e high -l Chinese
 
 # 一键生成 Release 注记并发布
-node scripts/agy_call.js --release v1.2.0 -m "4 hydrogen" -e high -l Chinese
+node scripts/agy_call.js --release v1.2.0 -m "4 neon" -e high -l Chinese
 ```
 
 ---

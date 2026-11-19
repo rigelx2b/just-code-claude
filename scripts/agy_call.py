@@ -8,7 +8,7 @@ Supports two backends:
  2. Direct Google Gemini REST API - Uses GEMINI_API_KEY or GOOGLE_API_KEY
 
 Supported Models:
- - 4 hydrogen: 'gemini-4-hydrogen' (Default: Unified model for UI copy, components, git commits, architecture & release docs, PR specs)
+ - 4 neon: 'gemini-4-neon' (Default: Unified model for UI copy, components, git commits, architecture & release docs, PR specs)
 
 Reasoning Effort:
  - Configurable via -e, --effort <low|medium|high|xhigh|max> or GEMINI_EFFORT env (Default: high)
@@ -67,12 +67,12 @@ def with_retry(operation, op_name: str = "API Call", max_retries: int = 3, initi
 
 def normalize_model(model: str = None) -> str:
     env_model = os.environ.get("GEMINI_MODEL")
-    raw = (model or env_model or "gemini-4-hydrogen").strip()
+    raw = (model or env_model or "gemini-4-neon").strip()
     lower = re.sub(r"[\s_-]+", "", raw.lower())
 
-    # 4 hydrogen: gemini-4-hydrogen
-    if "hydrogen" in lower or lower == "4" or lower == "4hydrogen":
-        return "gemini-4-hydrogen"
+    # 4 neon: gemini-4-neon
+    if "neon" in lower or lower == "4" or lower == "4neon":
+        return "gemini-4-neon"
     return raw
 
 
@@ -380,7 +380,7 @@ Git Diff:
 {capped_diff}
 """
 
-    model = getattr(args, "model", None) or "4 hydrogen"
+    model = getattr(args, "model", None) or "4 neon"
     effort = getattr(args, "effort", None) or "high"
     print(f"[just-code-claude] Generating commit message with {model} (effort: {effort})...", file=sys.stderr)
 
@@ -448,7 +448,7 @@ Git Diff:
 {capped_diff}
 """
 
-    model = getattr(args, "model", None) or "4 hydrogen"
+    model = getattr(args, "model", None) or "4 neon"
     effort = getattr(args, "effort", None) or "high"
     print(f"[just-code-claude] Generating PR description with {model} (effort: {effort})...", file=sys.stderr)
 
@@ -512,7 +512,7 @@ Format Requirements:
 - Ensure all technical terms, flags, and paths are backtick-formatted.
 """
 
-    model = getattr(args, "model", None) or "4 hydrogen"
+    model = getattr(args, "model", None) or "4 neon"
     effort = getattr(args, "effort", None) or "high"
     print(f"[just-code-claude] Generating GitHub Release Notes using {model} (effort: {effort})...", file=sys.stderr)
 
@@ -692,7 +692,7 @@ def main():
     parser.add_argument("-f", "--file", help="Read prompt/context from a file")
     parser.add_argument("-o", "--output", help="Write output directly to a file")
     parser.add_argument("-b", "--backend", choices=["auto", "agy", "api"], default="auto", help="Backend engine: 'auto' (default), 'agy', or 'api'")
-    parser.add_argument("-m", "--model", help="Choose model: '4 hydrogen' (gemini-4-hydrogen)")
+    parser.add_argument("-m", "--model", help="Choose model: '4 neon' (gemini-4-neon)")
     parser.add_argument("-e", "--effort", choices=["low", "medium", "high", "xhigh", "max"], help="Reasoning effort level (default: high)")
     parser.add_argument("--api-key", default=os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"), help="Google Gemini API key")
     parser.add_argument("-l", "--lang", help="Target output language (e.g. English, Korean, Japanese, Spanish)")

@@ -1,13 +1,13 @@
 ---
 name: just-code-claude
-description: "Strict division of labor: Claude handles 100% of the code architecture and logic, while delegating ALL natural language text generation (documentation, READMEs, guides, Git commit messages, PR descriptions, GitHub release notes, and in-code string literals inside quotes) to Google Gemini ('4 hydrogen' with customizable reasoning effort, defaulting to 'high') via 'agy' CLI or Direct Gemini API. Triggers when invoked via /just-code-claude, or when instructed to separate coding from text writing."
+description: "Strict division of labor: Claude handles 100% of the code architecture and logic, while delegating ALL natural language text generation (documentation, READMEs, guides, Git commit messages, PR descriptions, GitHub release notes, and in-code string literals inside quotes) to Google Gemini ('4 neon' with customizable reasoning effort, defaulting to 'high') via 'agy' CLI or Direct Gemini API. Triggers when invoked via /just-code-claude, or when instructed to separate coding from text writing."
 ---
 
 # Just Code, Claude (`/just-code-claude`)
 
 > **"Claude writes code. Gemini writes text."**  
 > Claude handles all architecture, logic, algorithms, types, and syntax.  
-> Gemini (`4 hydrogen` via `agy` CLI or Direct Gemini API) generates all human-facing text, documentation, UI copy, in-code string literals, Git commit messages, PR descriptions, and GitHub Release notes with controllable reasoning effort (default: `high`).
+> Gemini (`4 neon` via `agy` CLI or Direct Gemini API) generates all human-facing text, documentation, UI copy, in-code string literals, Git commit messages, PR descriptions, and GitHub Release notes with controllable reasoning effort (default: `high`).
 
 ---
 
@@ -28,11 +28,11 @@ When this skill is active:
 
 ## 2. Supported Models & Reasoning Effort
 
-The workflow uses the unified production model **`4 hydrogen`** with configurable reasoning effort (defaulting to **`high`**):
+The workflow uses the unified production model **`4 neon`** with configurable reasoning effort (defaulting to **`high`**):
 
 | Model | Canonical Name | Best Suited For | Default Effort |
 | :--- | :--- | :--- | :--- |
-| **`4 hydrogen`** *(Default)* | `gemini-4-hydrogen` | All text deliverables: UI copy, button labels, modal dialogs, form errors, toasts, Git commit messages, system architecture, API specifications, release notes, GitHub PR descriptions, and changelogs | `high` |
+| **`4 neon`** *(Default)* | `gemini-4-neon` | All text deliverables: UI copy, button labels, modal dialogs, form errors, toasts, Git commit messages, system architecture, API specifications, release notes, GitHub PR descriptions, and changelogs | `high` |
 
 ### Reasoning Effort Levels (`-e, --effort`):
 - `low`: Microcopy, single labels, button text (instantaneous).
@@ -52,7 +52,7 @@ The workflow uses the unified production model **`4 hydrogen`** with configurabl
 2. **Intent**: The exact goal the user is trying to accomplish or what architectural change was made.
 3. **Tone & Voice**: Desired emotional tone, brand persona, technical rigor.
 4. **Constraints**: Exact length budget, Conventional Commits format, casing style, punctuation.
-5. **Target Language & Model**: Explicit target language (e.g. English, Korean) and model (`4 hydrogen`, `high` effort).
+5. **Target Language & Model**: Explicit target language (e.g. English, Korean) and model (`4 neon`, `high` effort).
 
 ---
 
@@ -102,7 +102,7 @@ The skill provides the `just-code-claude` CLI command (backed by `scripts/agy_ca
 
 2. **Execute the automated replacement**:
    ```bash
-   node scripts/agy_call.js --replace-in-file src/components/SubscriptionCard.tsx -m "4 hydrogen" -e high
+   node scripts/agy_call.js --replace-in-file src/components/SubscriptionCard.tsx -m "4 neon" -e high
    ```
 
 3. **Result**: All placeholders are cleanly replaced in-place with polished, human-written copy inside standard string literals (`"..."`).
@@ -113,9 +113,9 @@ The skill provides the `just-code-claude` CLI command (backed by `scripts/agy_ca
 
 When writing guides, specifications, or READMEs:
 1. Formulate a detailed English prompt containing Purpose, Target Audience, Architecture, and Formatting.
-2. Delegate to **`4 hydrogen`** with **`high`** effort:
+2. Delegate to **`4 neon`** with **`high`** effort:
    ```bash
-   node scripts/agy_call.js -m "4 hydrogen" -e high -p "Context: New REST API v2 release. Intent: Comprehensive Developer Onboarding Guide covering JWT auth, rate limits, webhooks, and pagination. Audience: Third-party API consumers. Constraints: Include curl examples and JSON error responses. Target Language: English." -o docs/API_V2_GUIDE.md
+   node scripts/agy_call.js -m "4 neon" -e high -p "Context: New REST API v2 release. Intent: Comprehensive Developer Onboarding Guide covering JWT auth, rate limits, webhooks, and pagination. Audience: Third-party API consumers. Constraints: Include curl examples and JSON error responses. Target Language: English." -o docs/API_V2_GUIDE.md
    ```
 
 ---
@@ -129,17 +129,17 @@ When writing guides, specifications, or READMEs:
 Analyzes staged changes, crafts an exemplary Conventional Commits message, and runs `git commit`:
 ```bash
 git add src/
-node scripts/agy_call.js --commit -m "4 hydrogen" -e high -p "Context: Implemented OAuth2 PKCE login flow and secure token persistence" --lang English
+node scripts/agy_call.js --commit -m "4 neon" -e high -p "Context: Implemented OAuth2 PKCE login flow and secure token persistence" --lang English
 ```
 
 #### Option B: Inspect Commit Message First (`--commit-msg`)
 Generates the message and inspects or pipes it:
 ```bash
 # Preview to stdout
-node scripts/agy_call.js --commit-msg -m "4 hydrogen" -e high -p "Context: Bug fix for race condition in WebSocket heartbeat" --lang Korean
+node scripts/agy_call.js --commit-msg -m "4 neon" -e high -p "Context: Bug fix for race condition in WebSocket heartbeat" --lang Korean
 
 # Save to file and commit
-node scripts/agy_call.js --commit-msg -m "4 hydrogen" -e high -o .commit_msg.tmp
+node scripts/agy_call.js --commit-msg -m "4 neon" -e high -o .commit_msg.tmp
 git commit -F .commit_msg.tmp
 rm .commit_msg.tmp
 ```
@@ -148,9 +148,9 @@ rm .commit_msg.tmp
 
 ### Workflow 4: GitHub Pull Request Descriptions (`--pr-desc`)
 
-When opening a Pull Request, use **`4 hydrogen`** with **`high`** effort to produce a rigorous, structured PR description in Markdown:
+When opening a Pull Request, use **`4 neon`** with **`high`** effort to produce a rigorous, structured PR description in Markdown:
 ```bash
-node scripts/agy_call.js --pr-desc -m "4 hydrogen" -e high -p "Context: Migration of frontend state management from Redux to Zustand. Intent: Summarize performance gains and API breaking changes." -o PULL_REQUEST.md
+node scripts/agy_call.js --pr-desc -m "4 neon" -e high -p "Context: Migration of frontend state management from Redux to Zustand. Intent: Summarize performance gains and API breaking changes." -o PULL_REQUEST.md
 ```
 
 ---
@@ -161,7 +161,7 @@ When the user asks Claude Code to prepare, draft, or publish a release (e.g. *"�
 
 > [!CRITICAL]
 > **Claude Code must NEVER author release notes or changelogs directly using its own LLM.**  
-> Claude Code's responsibility is solely engineering context extraction. The release note synthesis and prose generation MUST be delegated to Gemini (**`4 hydrogen`** with **`high`** effort) to analyze commits, tags, and diffs.
+> Claude Code's responsibility is solely engineering context extraction. The release note synthesis and prose generation MUST be delegated to Gemini (**`4 neon`** with **`high`** effort) to analyze commits, tags, and diffs.
 
 #### Claude Code's Step-by-Step Release Protocol:
 1. **Analyze Git Baseline & Scope**:
@@ -174,10 +174,10 @@ When the user asks Claude Code to prepare, draft, or publish a release (e.g. *"�
    - Claude Code executes `just-code-claude` CLI (or the global script path):
    ```bash
    # Option A: Generate RELEASE_NOTES.md for user inspection
-   just-code-claude --release-notes -m "4 hydrogen" -e high -p "Context: v1.2.0 release. Highlights: Added dual-backend support, effort controls, and native Git automation." -o RELEASE_NOTES.md --lang Korean
+   just-code-claude --release-notes -m "4 neon" -e high -p "Context: v1.2.0 release. Highlights: Added dual-backend support, effort controls, and native Git automation." -o RELEASE_NOTES.md --lang Korean
 
    # Option B: Draft notes and publish directly via GitHub CLI (gh release create)
-   just-code-claude --release v1.2.0 -m "4 hydrogen" -e high -p "Context: Official stable v1.2.0 release" --lang Korean
+   just-code-claude --release v1.2.0 -m "4 neon" -e high -p "Context: Official stable v1.2.0 release" --lang Korean
    ```
    *Path fallback*: If `just-code-claude` is not in PATH:
    - Windows: `node "$env:USERPROFILE\.claude\skills\just-code-claude\scripts\agy_call.js"`
@@ -222,13 +222,13 @@ By offloading all conversational prose and text synthesis from Claude's context 
 Before finishing any turn under `/just-code-claude`, Claude MUST verify:
 
 - [ ] Did I write any markdown, guides, summaries, or documentation directly?  
-  👉 **If yes, remove and invoke Gemini via `agy_call.js` (`4 hydrogen`, `high` effort).**
+  👉 **If yes, remove and invoke Gemini via `agy_call.js` (`4 neon`, `high` effort).**
 - [ ] Did I author any UI copy, button labels, error alerts, or modal text inside quotes `""`?  
   👉 **If yes, replace with detailed `__AGY__("Context: ... | Intent: ... | Tone: ... | Constraints: ...")` directives and run `agy_call.js --replace-in-file`.**
 - [ ] Did I write any git commit message or PR description directly?  
   👉 **If yes, run `node scripts/agy_call.js --commit` or `--commit-msg` or `--pr-desc` with detailed context.**
 - [ ] Did I author any GitHub release notes or changelog directly?  
-  👉 **If yes, run `node scripts/agy_call.js --release-notes` or `--release` with `4 hydrogen` & `high` effort.**
+  👉 **If yes, run `node scripts/agy_call.js --release-notes` or `--release` with `4 neon` & `high` effort.**
 - [ ] Are all in-code placeholders sufficiently detailed with the 5 dimensions?  
   👉 **Ensure no lazy placeholders like `__AGY__("error")` exist.**
 - [ ] Did Gemini generate 100% of the human-facing language?  

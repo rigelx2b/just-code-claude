@@ -20,7 +20,7 @@
 [![Powered by: Google Gemini](https://img.shields.io/badge/Powered%20by-Google%20Gemini-4285F4.svg)](https://aistudio.google.com/)
 
 > **"Claude writes code. Gemini writes text."**  
-> Una habilidad de código abierto para Claude Code: Claude se enfoca en la arquitectura y la lógica de programación, mientras delega la documentación técnica, READMEs, **mensajes de commit en Git, descripciones de PR, notas de versión de GitHub Releases** y textos de UI a **Google Gemini** (`4 hydrogen`, esfuerzo de razonamiento `high` por defecto y configurable) mediante la **API REST de Gemini** o la **CLI Antigravity (`agy`)**.
+> Una habilidad de código abierto para Claude Code: Claude se enfoca en la arquitectura y la lógica de programación, mientras delega la documentación técnica, READMEs, **mensajes de commit en Git, descripciones de PR, notas de versión de GitHub Releases** y textos de UI a **Google Gemini** (`4 neon`, esfuerzo de razonamiento `high` por defecto y configurable) mediante la **API REST de Gemini** o la **CLI Antigravity (`agy`)**.
 
 ---
 
@@ -28,11 +28,11 @@
 
 ### Escenario 1: Creación de Componentes UI en Frontend
 - **❌ Antes (Claude Code Estándar)**: La ventana de chat se satura de largas explicaciones y saludos superfluos, ralentizando la entrega. El código contiene textos ficticios genéricos y robóticos (`"Session Expiring"`, `"Please click OK"`).
-- **✅ Después (`just-code-claude`)**: Cero texto conversacional, **entrega inmediata de código puro y limpio**. Gemini `4 hydrogen` (`high`) sustituye los textos por copias profesionales de alta conversión (`"Session Expiring in 5 Minutes"`). Ahorro superior al 50% en tokens de contexto.
+- **✅ Después (`just-code-claude`)**: Cero texto conversacional, **entrega inmediata de código puro y limpio**. Gemini `4 neon` (`high`) sustituye los textos por copias profesionales de alta conversión (`"Session Expiring in 5 Minutes"`). Ahorro superior al 50% en tokens de contexto.
 
 ### Escenario 2: Commits en Git y Releases en GitHub
 - **❌ Antes**: Commits vagos (`"update files"`) o resúmenes incompletos y frágiles en el chat.
-- **✅ Después**: Gemini `4 hydrogen` (`high`) genera mensajes Conventional Commits exhaustivos, sintetiza las diferencias de tags y publica directamente la versión oficial en GitHub con `gh release create`.
+- **✅ Después**: Gemini `4 neon` (`high`) genera mensajes Conventional Commits exhaustivos, sintetiza las diferencias de tags y publica directamente la versión oficial en GitHub con `gh release create`.
 
 ---
 
@@ -43,7 +43,7 @@
 | **Consumo de Tokens de Sesión** | ~3,500 tokens (con explicaciones) | ~1,600 tokens (código puro) | **📉 Ahorro de ~54%** |
 | **Velocidad de Respuesta (Latencia)**| ~18.2s (tipeando texto largo) | ~7.8s (código inmediato) | **⚡ ~2.3x Más Rápido** |
 | **Localización Multilingüe i18n** | Contamina el contexto principal | Procesado en lote vía CLI fuera de banda | **📉 >70% Ahorro de Tokens** |
-| **Calidad de Textos UX** | Marcadores genéricos (`"Error"`) | Gemini 4 hydrogen (high) | **✨ Nivel Producción Inmediato** |
+| **Calidad de Textos UX** | Marcadores genéricos (`"Error"`) | Gemini 4 neon (high) | **✨ Nivel Producción Inmediato** |
 | **Síntesis de Changelogs** | Listado simple de commits | Análisis profundo y guía de migración | **🚀 Releases de Calidad Empresarial** |
 
 ---
@@ -66,7 +66,7 @@ Excluir por completo el lenguaje natural podría ocultar advertencias de segurid
 
 1. **Instalación Global (Recomendada)**: Ejecute `npx skills add rigelx2b/just-code-claude -g -a claude-code` o `.\install.ps1` (Linux/macOS: `bash install.sh`) para inyectar automáticamente `~/.claude/rules/just-code-claude.md` y `~/.claude/CLAUDE.md`.
 2. **Configuración por Proyecto**: Copie `rules/just-code-claude.md` a `.claude/rules/` en su repositorio.
-3. **Invocación en Sesión**: Escriba `/just-code-claude` o indique: *"Usa 4 hydrogen high para redactar textos y releases"*.
+3. **Invocación en Sesión**: Escriba `/just-code-claude` o indique: *"Usa 4 neon high para redactar textos y releases"*.
 
 ---
 
@@ -74,7 +74,7 @@ Excluir por completo el lenguaje natural podría ocultar advertencias de segurid
 
 | Modelo | Alias CLI | Caso de Uso Principal | Esfuerzo Recomendado |
 | :--- | :--- | :--- | :--- |
-| **`4 hydrogen`** *(Por defecto)* | `4 hydrogen`, `hydrogen`, `gemini-4-hydrogen` | Modelo unificado para copias de UI, botones, modales, mensajes de commit, documentos de arquitectura, descripciones de PR y GitHub Releases | `high` |
+| **`4 neon`** *(Por defecto)* | `4 neon`, `neon`, `gemini-4-neon` | Modelo unificado para copias de UI, botones, modales, mensajes de commit, documentos de arquitectura, descripciones de PR y GitHub Releases | `high` |
 
 ---
 
@@ -83,30 +83,30 @@ Excluir por completo el lenguaje natural podría ocultar advertencias de segurid
 > [!IMPORTANT]
 > **Comportamiento de Claude Code al crear Releases**:  
 > Cuando el usuario solicita a Claude Code *"publica la versión v1.2.0"* o *"crea un GitHub release"*, Claude Code NO redacta las notas de versión con su propio LLM.  
-> Conforme a la regla `~/.claude/rules/just-code-claude.md`, Claude Code extrae metadatos de Git (tags, historial de commits y diffs) y delega la redacción a Gemini **`4 hydrogen`** (esfuerzo `high`), publicando luego la versión a través de GitHub CLI (`gh release create`).
+> Conforme a la regla `~/.claude/rules/just-code-claude.md`, Claude Code extrae metadatos de Git (tags, historial de commits y diffs) y delega la redacción a Gemini **`4 neon`** (esfuerzo `high`), publicando luego la versión a través de GitHub CLI (`gh release create`).
 
 ### 1. Commit automático en un solo comando (`--commit`)
 ```bash
-just-code-claude --commit -m "4 hydrogen" -e high -p "Context: Implementación de modal de autenticación MFA y flujo de actualización de tokens" -l Spanish
+just-code-claude --commit -m "4 neon" -e high -p "Context: Implementación de modal de autenticación MFA y flujo de actualización de tokens" -l Spanish
 ```
 
 ### 2. Vista previa del mensaje de commit (`--commit-msg`)
 ```bash
-just-code-claude --commit-msg -m "4 hydrogen" -e high -p "Context: Corrección de condición de carrera en WebSocket heartbeat" -l Spanish
+just-code-claude --commit-msg -m "4 neon" -e high -p "Context: Corrección de condición de carrera en WebSocket heartbeat" -l Spanish
 ```
 
 ### 3. Descripción completa de GitHub PR (`--pr-desc`)
 ```bash
-just-code-claude --pr-desc -m "4 hydrogen" -e high -p "Context: Migración de estado frontend de Redux a Zustand" -o PULL_REQUEST.md -l Spanish
+just-code-claude --pr-desc -m "4 neon" -e high -p "Context: Migración de estado frontend de Redux a Zustand" -o PULL_REQUEST.md -l Spanish
 ```
 
 ### 4. Notas de GitHub Releases y publicación (`--release-notes`, `--release [tag]`)
 ```bash
 # Redactar notas de versión
-just-code-claude --release-notes -m "4 hydrogen" -e high -p "Context: Versión v1.2.0" -o RELEASE_NOTES.md -l Spanish
+just-code-claude --release-notes -m "4 neon" -e high -p "Context: Versión v1.2.0" -o RELEASE_NOTES.md -l Spanish
 
 # Publicar release en GitHub
-just-code-claude --release v1.2.0 -m "4 hydrogen" -e high -l Spanish
+just-code-claude --release v1.2.0 -m "4 neon" -e high -l Spanish
 ```
 
 ---
@@ -134,17 +134,17 @@ Middleware de ingeniería integrado para eliminar el desperdicio de tokens y man
 ## 🛠 Referencia CLI
 
 ```bash
-# Reemplazar cadenas en código con 4 hydrogen (high)
-node scripts/agy_call.js --replace-in-file src/components/Login.tsx -m "4 hydrogen" -e high -l Spanish
+# Reemplazar cadenas en código con 4 neon (high)
+node scripts/agy_call.js --replace-in-file src/components/Login.tsx -m "4 neon" -e high -l Spanish
 
-# Generar documentación técnica con 4 hydrogen (high)
-node scripts/agy_call.js -m "4 hydrogen" -e high -p "Escribe la guía de arquitectura de microservicios" -o docs/ARCH.md -l Spanish
+# Generar documentación técnica con 4 neon (high)
+node scripts/agy_call.js -m "4 neon" -e high -p "Escribe la guía de arquitectura de microservicios" -o docs/ARCH.md -l Spanish
 
 # Crear commit automáticamente
-node scripts/agy_call.js --commit -m "4 hydrogen" -e high -l Spanish
+node scripts/agy_call.js --commit -m "4 neon" -e high -l Spanish
 
 # Publicar GitHub Release
-node scripts/agy_call.js --release v1.2.0 -m "4 hydrogen" -e high -l Spanish
+node scripts/agy_call.js --release v1.2.0 -m "4 neon" -e high -l Spanish
 ```
 
 ---

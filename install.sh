@@ -29,10 +29,10 @@ if [ -f "$GLOBAL_CLAUDE_MD" ]; then
 # just-code-claude
 - **just-code-claude** (~/.claude/skills/just-code-claude/SKILL.md, rule: ~/.claude/rules/just-code-claude.md)
 Claude writes code; Gemini writes text.
-- GitHub Releases: Claude Code must NEVER write release notes or changelogs directly. Run 'just-code-claude --release-notes' (or '--release [tag]') with Gemini 4 hydrogen (high effort), then publish with 'gh release create'.
-- Git Commits: Run 'just-code-claude --commit' or '--commit-msg' (Gemini 4 hydrogen, high effort).
-- Pull Requests: Run 'just-code-claude --pr-desc' (Gemini 4 hydrogen, high effort).
-- In-Code Copy: Insert '__AGY__("...")' directives and run 'just-code-claude --replace-in-file' (Gemini 4 hydrogen, high effort).
+- GitHub Releases: Claude Code must NEVER write release notes or changelogs directly. Run 'just-code-claude --release-notes' (or '--release [tag]') with Gemini 4 neon (high effort), then publish with 'gh release create'.
+- Git Commits: Run 'just-code-claude --commit' or '--commit-msg' (Gemini 4 neon, high effort).
+- Pull Requests: Run 'just-code-claude --pr-desc' (Gemini 4 neon, high effort).
+- In-Code Copy: Insert '__AGY__("...")' directives and run 'just-code-claude --replace-in-file' (Gemini 4 neon, high effort).
 - Edge Cases: 1-2 line critical security/runtime warnings and technical inline code comments are permitted.
 EOF
   fi
@@ -41,10 +41,10 @@ else
 # just-code-claude
 - **just-code-claude** (~/.claude/skills/just-code-claude/SKILL.md, rule: ~/.claude/rules/just-code-claude.md)
 Claude writes code; Gemini writes text.
-- GitHub Releases: Claude Code must NEVER write release notes or changelogs directly. Run 'just-code-claude --release-notes' (or '--release [tag]') with Gemini 4 hydrogen (high effort), then publish with 'gh release create'.
-- Git Commits: Run 'just-code-claude --commit' or '--commit-msg' (Gemini 4 hydrogen, high effort).
-- Pull Requests: Run 'just-code-claude --pr-desc' (Gemini 4 hydrogen, high effort).
-- In-Code Copy: Insert '__AGY__("...")' directives and run 'just-code-claude --replace-in-file' (Gemini 4 hydrogen, high effort).
+- GitHub Releases: Claude Code must NEVER write release notes or changelogs directly. Run 'just-code-claude --release-notes' (or '--release [tag]') with Gemini 4 neon (high effort), then publish with 'gh release create'.
+- Git Commits: Run 'just-code-claude --commit' or '--commit-msg' (Gemini 4 neon, high effort).
+- Pull Requests: Run 'just-code-claude --pr-desc' (Gemini 4 neon, high effort).
+- In-Code Copy: Insert '__AGY__("...")' directives and run 'just-code-claude --replace-in-file' (Gemini 4 neon, high effort).
 - Edge Cases: 1-2 line critical security/runtime warnings and technical inline code comments are permitted.
 EOF
 fi

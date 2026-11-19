@@ -20,7 +20,7 @@
 [![Powered by: Google Gemini](https://img.shields.io/badge/Powered%20by-Google%20Gemini-4285F4.svg)](https://aistudio.google.com/)
 
 > **"Claude writes code. Gemini writes text."**  
-> Ein Open-Source-Skill für Claude Code: Claude konzentriert sich auf Architektur und Codelogik, während technische Dokumentationen, READMEs, **Git-Commit-Nachrichten, PR-Beschreibungen, GitHub Release Notes** und UI-Texte an **Google Gemini** (`4 hydrogen`, Standardaufwand `high`, einstellbar) über die **Google Gemini REST API** oder die **Antigravity CLI (`agy`)** delegiert werden.
+> Ein Open-Source-Skill für Claude Code: Claude konzentriert sich auf Architektur und Codelogik, während technische Dokumentationen, READMEs, **Git-Commit-Nachrichten, PR-Beschreibungen, GitHub Release Notes** und UI-Texte an **Google Gemini** (`4 neon`, Standardaufwand `high`, einstellbar) über die **Google Gemini REST API** oder die **Antigravity CLI (`agy`)** delegiert werden.
 
 ---
 
@@ -28,11 +28,11 @@
 
 ### Szenario 1: Entwicklung von Frontend-UI-Komponenten
 - **❌ Vorher (Standard Claude Code)**: Das Chatfenster wird mit ausschweifenden Erklärungen und Höflichkeitsfloskeln überflutet, was die Latenz erhöht. Der Code enthält starre, unnatürliche Platzhalter (`"Session Expiring"`, `"Please click OK"`).
-- **✅ Nachher (`just-code-claude`)**: Null Floskeln, **sofortige Ausgabe sauberer, optimierter Codelogik**. Gemini `4 hydrogen` (`high`) ersetzt Platzhalter durch ansprechende, produktionsreife UX-Texte (`"Session Expiring in 5 Minutes"`). Über 50 % Tokenersparnis.
+- **✅ Nachher (`just-code-claude`)**: Null Floskeln, **sofortige Ausgabe sauberer, optimierter Codelogik**. Gemini `4 neon` (`high`) ersetzt Platzhalter durch ansprechende, produktionsreife UX-Texte (`"Session Expiring in 5 Minutes"`). Über 50 % Tokenersparnis.
 
 ### Szenario 2: Git-Commits und GitHub Releases
 - **❌ Vorher**: Unpräzise Commits (`"update files"`) oder lückenhafte Release-Zusammenfassungen im Chat.
-- **✅ Nachher**: Gemini `4 hydrogen` (`high`) erzeugt präzise Conventional Commits, analysiert Tag-Diffs und publiziert das offizielle Release direkt über `gh release create`.
+- **✅ Nachher**: Gemini `4 neon` (`high`) erzeugt präzise Conventional Commits, analysiert Tag-Diffs und publiziert das offizielle Release direkt über `gh release create`.
 
 ---
 
@@ -43,7 +43,7 @@
 | **Sitzungs-Tokenverbrauch** | ~3.500 Tokens (inkl. Erklärungen) | ~1.600 Tokens (reiner Code) | **📉 ~54% Ersparnis** |
 | **Antwort-Latenz (Geschwindigkeit)**| ~18.2s (Warten auf Textausgabe) | ~7.8s (fokussierte Codeausgabe)| **⚡ ~2.3x Schneller** |
 | **Mehrsprachige i18n-Lokalisierung**| Überlädt den Hauptkontext | Stapelverarbeitung per CLI out-of-band| **📉 >70% Tokenersparnis** |
-| **UX-Textqualität** | Mechanische Platzhalter (`"Error"`)| Gemini 4 hydrogen (high) | **✨ Sofortige Produktionsqualität** |
+| **UX-Textqualität** | Mechanische Platzhalter (`"Error"`)| Gemini 4 neon (high) | **✨ Sofortige Produktionsqualität** |
 | **Changelog-Synthese** | Einfache Commit-Listen | Tiefgehende Analyse & Migrationshilfe | **🚀 Enterprise-Release-Notes** |
 
 ---
@@ -66,7 +66,7 @@ Ein vollständiger Verzicht auf natürliche Sprache könnte fatale Laufzeit- ode
 
 1. **Globale Einrichtung (Empfohlen)**: `npx skills add rigelx2b/just-code-claude -g -a claude-code` oder `.\install.ps1` (Linux/macOS: `bash install.sh`) ausführen, um `~/.claude/rules/just-code-claude.md` und `~/.claude/CLAUDE.md` automatisch zu registrieren.
 2. **Projekteigene Konfiguration**: `rules/just-code-claude.md` in `.claude/rules/` im Projektverzeichnis kopieren.
-3. **Aufruf in der Sitzung**: `/just-code-claude` eingeben oder formulieren: *"Nutze 4 hydrogen high für Texte und Releases"*.
+3. **Aufruf in der Sitzung**: `/just-code-claude` eingeben oder formulieren: *"Nutze 4 neon high für Texte und Releases"*.
 
 ---
 
@@ -74,7 +74,7 @@ Ein vollständiger Verzicht auf natürliche Sprache könnte fatale Laufzeit- ode
 
 | Modell | CLI-Alias | Hauptanwendungsbereich | Empfohlener Aufwand |
 | :--- | :--- | :--- | :--- |
-| **`4 hydrogen`** *(Standard)* | `4 hydrogen`, `hydrogen`, `gemini-4-hydrogen` | Einheitliches Modell: UI-Texte, Buttons, Modale, Git-Commit-Nachrichten, Systemarchitektur, API-Spezifikationen, GitHub PRs, GitHub Release Notes | `high` |
+| **`4 neon`** *(Standard)* | `4 neon`, `neon`, `gemini-4-neon` | Einheitliches Modell: UI-Texte, Buttons, Modale, Git-Commit-Nachrichten, Systemarchitektur, API-Spezifikationen, GitHub PRs, GitHub Release Notes | `high` |
 
 ---
 
@@ -83,30 +83,30 @@ Ein vollständiger Verzicht auf natürliche Sprache könnte fatale Laufzeit- ode
 > [!IMPORTANT]
 > **Verhalten von Claude Code bei Releases**:  
 > Wenn der Benutzer Claude Code beauftragt (*"Release v1.2.0 veröffentlichen"*, *"GitHub Release erstellen"*), verfasst Claude Code die Release Notes NICHT selbst mit seinem eigenen Modell.  
-> Gemäß `~/.claude/rules/just-code-claude.md` extrahiert Claude Code die Git-Historie und delegiert das Verfassen der Release Notes an Gemini **`4 hydrogen`** (Aufwand `high`), um das Release anschließend über die GitHub CLI (`gh release create`) zu publizieren.
+> Gemäß `~/.claude/rules/just-code-claude.md` extrahiert Claude Code die Git-Historie und delegiert das Verfassen der Release Notes an Gemini **`4 neon`** (Aufwand `high`), um das Release anschließend über die GitHub CLI (`gh release create`) zu publizieren.
 
 ### 1. Ein-Klick-Commit (`--commit`)
 ```bash
-just-code-claude --commit -m "4 hydrogen" -e high -p "Context: Implementierung von MFA-Login-Dialog und Token-Refresh" -l German
+just-code-claude --commit -m "4 neon" -e high -p "Context: Implementierung von MFA-Login-Dialog und Token-Refresh" -l German
 ```
 
 ### 2. Commit-Nachricht vorab prüfen (`--commit-msg`)
 ```bash
-just-code-claude --commit-msg -m "4 hydrogen" -e high -p "Context: Behebung von Race Condition beim WebSocket Heartbeat" -l German
+just-code-claude --commit-msg -m "4 neon" -e high -p "Context: Behebung von Race Condition beim WebSocket Heartbeat" -l German
 ```
 
 ### 3. Vollständige GitHub PR-Beschreibung (`--pr-desc`)
 ```bash
-just-code-claude --pr-desc -m "4 hydrogen" -e high -p "Context: Migration des Frontend-State-Managements von Redux zu Zustand" -o PULL_REQUEST.md -l German
+just-code-claude --pr-desc -m "4 neon" -e high -p "Context: Migration des Frontend-State-Managements von Redux zu Zustand" -o PULL_REQUEST.md -l German
 ```
 
 ### 4. GitHub Release Notes & Veröffentlichung (`--release-notes`, `--release [tag]`)
 ```bash
 # Release Notes in Markdown-Datei generieren
-just-code-claude --release-notes -m "4 hydrogen" -e high -p "Context: Meilenstein-Release v1.2.0" -o RELEASE_NOTES.md -l German
+just-code-claude --release-notes -m "4 neon" -e high -p "Context: Meilenstein-Release v1.2.0" -o RELEASE_NOTES.md -l German
 
 # GitHub Release direkt veröffentlichen
-just-code-claude --release v1.2.0 -m "4 hydrogen" -e high -l German
+just-code-claude --release v1.2.0 -m "4 neon" -e high -l German
 ```
 
 ---
@@ -134,17 +134,17 @@ Integrierte Engineering-Middleware zur Eliminierung von Token-Verschwendung und 
 ## 🛠 CLI-Referenz
 
 ```bash
-# In-Code Textersetzung mit 4 hydrogen (high)
-node scripts/agy_call.js --replace-in-file src/components/Login.tsx -m "4 hydrogen" -e high -l German
+# In-Code Textersetzung mit 4 neon (high)
+node scripts/agy_call.js --replace-in-file src/components/Login.tsx -m "4 neon" -e high -l German
 
-# Technische Dokumentation mit 4 hydrogen (high) erstellen
-node scripts/agy_call.js -m "4 hydrogen" -e high -p "Schreibe die Microservices-Architekturübersicht" -o docs/ARCH.md -l German
+# Technische Dokumentation mit 4 neon (high) erstellen
+node scripts/agy_call.js -m "4 neon" -e high -p "Schreibe die Microservices-Architekturübersicht" -o docs/ARCH.md -l German
 
 # Git-Commit automatisch erstellen
-node scripts/agy_call.js --commit -m "4 hydrogen" -e high -l German
+node scripts/agy_call.js --commit -m "4 neon" -e high -l German
 
 # GitHub Release veröffentlichen
-node scripts/agy_call.js --release v1.2.0 -m "4 hydrogen" -e high -l German
+node scripts/agy_call.js --release v1.2.0 -m "4 neon" -e high -l German
 ```
 
 ---
